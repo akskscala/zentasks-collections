@@ -6,34 +6,33 @@ import play.api.Play.current
 import anorm._
 import anorm.SqlParser._
 
+import org.squeryl.PrimitiveTypeMode._
+import org.squeryl._
+
 case class Project(val id: Option[Long], var folder: String, var name: String)
 
 object Project {
 
-  // -- Parsers
-
-  /**
-   * Parse a Project from a ResultSet
-   */
-  val simple = {
-    get[Long]("project.id") ~
-      get[String]("project.folder") ~
-      get[String]("project.name") map {
-      case id ~ folder ~ name => new Project(Option(id), folder, name)
-    }
-  }
+  import ZentasksDb._
 
   // -- Queries
+
+  // TODO delete
+  val simple = {
+    get[Pk[Long]]("project.id") ~
+      get[String]("project.folder") ~
+      get[String]("project.name") map {
+      case id~folder~name => Project(id.toOption, folder, name)
+    }
+  }
 
   /**
    * Retrieve a Project from id.
    */
   def findById(id: Long): Option[Project] = {
-    DB.withConnection {
-      implicit connection =>
-        SQL("select * from project where id = {id}").on(
-          'id -> id
-        ).as(Project.simple.singleOpt)
+    transaction {
+        val q: Query[Project] = from(projects)(project => where(project.id === id) select(project))
+        q.toIterable.headOption
     }
   }
 
