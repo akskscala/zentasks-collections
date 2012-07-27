@@ -1,24 +1,18 @@
 package models
 
-import play.api.db._
-import play.api.Play.current
+import org.squeryl.dsl.CompositeKey2
+import org.squeryl.KeyedEntity
 
-import anorm._
-import anorm.SqlParser._
-import org.squeryl
-import squeryl.dsl.CompositeKey2
-import squeryl.KeyedEntity
+case class Project(var id: Long, var folder: String, var name: String) extends KeyedEntity[Long] {
 
-
-case class Project(var id : Long,var folder : String,var name : String) extends KeyedEntity[Long]{
-
-  def this() = this(0,"","")
+  def this() = this(0, "", "")
 }
-case class ProjectMember(var projectId : Long, var userEmail : String) extends KeyedEntity[CompositeKey2[Long,String]]{
 
-  def this() = this(0,"")
+case class ProjectMember(var projectId: Long, var userEmail: String) extends KeyedEntity[CompositeKey2[Long, String]] {
 
-  def id = new CompositeKey2[Long,String](projectId,userEmail)
+  def this() = this(0, "")
+
+  def id = new CompositeKey2[Long, String](projectId, userEmail)
 }
 
 
@@ -26,76 +20,74 @@ object Project {
 
   import org.squeryl.PrimitiveTypeMode._
 
-  val projects = ZenSchema.projects
-  val members = ZenSchema.projectMembers
-  val users = ZenSchema.users
+  val projects = ZentasksSchema.projects
+  val members = ZentasksSchema.projectMembers
+  val users = ZentasksSchema.users
 
-  import ZenSchema._
 
-  
   // -- Queries
-    
+
   /**
    * Retrieve a Project from id.
    */
   def findById(id: Long): Option[Project] = {
 
-    transaction{
+    transaction {
       projects.lookup(id)
     }
   }
-  
+
   /**
    * Retrieve project for user
    */
   def findInvolving(user: String): Seq[Project] = {
-    transaction{
+    transaction {
       val projectIds = from(members)(t => {
         where(t.userEmail === user).select(t)
-      }).toList map(_.projectId)
+      }).toList map (_.projectId)
 
       from(projects)(t => {
         where(t.id in projectIds).select(t)
       }).toList
     }
   }
-  
+
   /**
    * Update a project.
    */
   def rename(id: Long, newName: String) {
-    transaction{
+    transaction {
       update(projects)(t => {
         where(t.id === id).set(t.name := newName)
       })
     }
   }
-  
+
   /**
    * Delete a project.
    */
   def delete(id: Long) {
-    transaction{
+    transaction {
       projects.delete(id)
     }
 
   }
-  
+
   /**
    * Delete all project in a folder
    */
   def deleteInFolder(folder: String) {
-    transaction{
+    transaction {
       projects.deleteWhere(t => t.folder === folder)
     }
 
   }
-  
+
   /**
    * Rename a folder
    */
   def renameFolder(folder: String, newName: String) {
-    transaction{
+    transaction {
       update(projects)(t => {
         where(t.folder === folder).set(t.folder := newName)
       })
@@ -103,12 +95,12 @@ object Project {
     }
 
   }
-  
+
   /**
    * Retrieve project member
    */
   def membersOf(project: Long): Seq[User] = {
-    transaction{
+    transaction {
       val ms = from(members)(t => {
         where(t.projectId === project).select(t)
       }).toList.map(_.userEmail)
@@ -120,54 +112,54 @@ object Project {
     }
 
   }
-  
+
   /**
    * Add a member to the project team.
    */
   def addMember(project: Long, user: String) {
-    val m = new ProjectMember(project,user)
-    transaction{
+    val m = new ProjectMember(project, user)
+    transaction {
       members.insert(m)
     }
 
   }
-  
+
   /**
    * Remove a member from the project team.
    */
   def removeMember(project: Long, user: String) {
-    transaction{
+    transaction {
       members.deleteWhere(t => {
         (t.projectId === project) and (t.userEmail === user)
       })
     }
   }
-  
+
   /**
    * Check if a user is a member of this project
    */
   def isMember(project: Long, user: String): Boolean = {
 
-    transaction{
+    transaction {
       from(members)(t => {
         where((t.projectId === project) and (t.userEmail === user)).select(t)
       }).headOption.isDefined
     }
 
   }
-   
+
   /**
    * Create a Project.
    */
   def create(project: Project, members: Seq[String]): Project = {
 
-    transaction{
+    transaction {
       projects.insert(project)
 
-      val ms = members.map( email => ProjectMember(project.id,email))
+      val ms = members.map(email => ProjectMember(project.id, email))
       this.members.insert(ms)
     }
     project
   }
-  
+
 }

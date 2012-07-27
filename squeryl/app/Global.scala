@@ -1,24 +1,19 @@
-import org.squeryl.adapters.PostgreSqlAdapter
+import org.squeryl.adapters.{H2Adapter, PostgreSqlAdapter}
 import org.squeryl.{PrimitiveTypeMode, SessionFactory, Session}
 import play.api._
 
+import db.DB
 import models._
 import anorm._
 
 object Global extends GlobalSettings {
   
   override def onStart(app: Application) {
-    Class.forName("com.mysql.jdbc.Driver")
-
-
-    SessionFactory.concreteFactory = Some(()=>
-      Session.create(
-        java.sql.DriverManager.getConnection("jdbc:mysql://localhost/zentask","***set username***","***set Password***"),
-        new org.squeryl.adapters.MySQLInnoDBAdapter()))
-
+    import play.api.Play.current
+    SessionFactory.concreteFactory = Some(() => Session.create(DB.getConnection("default", true), new H2Adapter))
 
     PrimitiveTypeMode.transaction{
-      ZenSchema.create
+      ZentasksSchema.create
       InitialData.insert()
     }
   }
