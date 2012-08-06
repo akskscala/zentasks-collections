@@ -1,15 +1,10 @@
 package models
 
-import play.api.db._
-import play.api.Play.current
-
-import anorm._
-import anorm.SqlParser._
 
 import java.sql.ResultSet
 import DBStuff.queryEvaluator
 
-case class Project(id: Pk[Long], folder: String, name: String)
+case class Project(id: Option[Long], folder: String, name: String)
 
 object Project {
 
@@ -21,7 +16,7 @@ object Project {
    */
 
   val simpleQ = { row: ResultSet =>
-    Project(Id(row.getLong("project.id")), row.getString("project.folder"), row.getString("project.name"))
+    Project(Option.apply(row.getLong("project.id")), row.getString("project.folder"), row.getString("project.name"))
   }
   
   // -- Queries
@@ -130,7 +125,7 @@ object Project {
         t.insert("insert into project_member values (?, ?)", id, email)
       }
 
-      project.copy(id = Id(id))
+      project.copy(id = Some(id))
     }
   }
   

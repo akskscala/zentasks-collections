@@ -1,42 +1,21 @@
 package models
 
-import java.util.{Date}
+import java.util.Date
 
-import play.api.db._
-import play.api.Play.current
-
-import anorm._
-import anorm.SqlParser._
-
-import java.sql.ResultSet
+import java.sql.{Timestamp, ResultSet}
 import DBStuff.queryEvaluator
+import com.twitter.querulous.query.NullValues
 
-case class Task(id: Pk[Long], folder: String, project: Long, title: String, done: Boolean, dueDate: Option[Date], assignedTo: Option[String])
+case class Task(id: Option[Long], folder: String, project: Long, title: String,
+                done: Boolean, dueDate: Option[Date], assignedTo: Option[String])
 
 object Task {
   
   // -- Parsers
-  
-  /**
-   * Parse a Task from a ResultSet
-   */
-  val simple = {
-    get[Pk[Long]]("task.id") ~
-    get[String]("task.folder") ~
-    get[Long]("task.project") ~
-    get[String]("task.title") ~
-    get[Boolean]("task.done") ~
-    get[Option[Date]]("task.due_date") ~
-    get[Option[String]]("task.assigned_to") map {
-      case id~folder~project~title~done~dueDate~assignedTo => Task(
-        id, folder, project, title, done, dueDate, assignedTo
-      )
-    }
-  }
 
   val simpleQ = { row: ResultSet =>
     Task(
-      Id(row.getLong("task.id")),
+      Option.apply(row.getLong("task.id")),
       row.getString("task.folder"),
       row.getLong("task.project"),
       row.getString("task.title"),
@@ -135,13 +114,13 @@ object Task {
       """,
       task.title,
       task.done,
-      task.dueDate,
-      task.assignedTo,
+      task.dueDate.map{d => new Timestamp(d.getTime())}.getOrElse(NullValues.NullTimestamp),
+      task.assignedTo.getOrElse(NullValues.NullString),
       task.project,
       task.folder
     )
 
-    task.copy(id = Id(id))
+    task.copy(id = Some(id))
   }
   
 }
