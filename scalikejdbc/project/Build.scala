@@ -1,7 +1,7 @@
 import sbt._
 import Keys._
 
-import PlayProject._
+import play.Project._
 
 object ApplicationBuild extends Build {
 
@@ -9,12 +9,13 @@ object ApplicationBuild extends Build {
     val appVersion      = "1.0"
 
     val appDependencies = Seq(
-      "com.github.seratch" %% "scalikejdbc" % "[1.3,)"
+      "com.h2database"     %  "h2"                        % "[1.3,)",
+      "com.github.seratch" %% "scalikejdbc"               % "[1.6,)",
+      "com.github.seratch" %% "scalikejdbc-interpolation" % "[1.6,)",
+      "com.github.seratch" %% "scalikejdbc-play-plugin"   % "[1.6,)"
     )
 
-    val main = PlayProject(appName, appVersion, appDependencies, mainLang = SCALA).settings(
-      resolvers += "Sonatype OSS" at "http://oss.sonatype.org/content/repositories/releases",
-      externalResolvers ~= (_.filter(_.name != "Scala-Tools Maven2 Repository"))
+    val main = play.Project(appName, appVersion, appDependencies).settings(
     )
 
 }

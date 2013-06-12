@@ -1,0 +1,2797 @@
+2013-06-12 14:53:28,659 - [INFO] - from play in main 
+Listening for HTTP on /0.0.0.0:9000
+
+2013-06-12 14:53:38,770 - [DEBUG] - from net.sf.ehcache.config.ConfigurationFactory in New I/O  worker #1 
+Configuring ehcache from ehcache.xml found in the classpath: jar:file:/Users/k-sera/.ivy2/cache/play/play_2.10/jars/play_2.10-2.1.0.jar!/ehcache.xml
+
+2013-06-12 14:53:38,770 - [DEBUG] - from net.sf.ehcache.config.ConfigurationFactory in New I/O  worker #1 
+Configuring ehcache from URL: jar:file:/Users/k-sera/.ivy2/cache/play/play_2.10/jars/play_2.10-2.1.0.jar!/ehcache.xml
+
+2013-06-12 14:53:38,770 - [DEBUG] - from net.sf.ehcache.config.ConfigurationFactory in New I/O  worker #1 
+Configuring ehcache from InputStream
+
+2013-06-12 14:53:38,781 - [DEBUG] - from net.sf.ehcache.config.BeanHandler in New I/O  worker #1 
+Ignoring ehcache attribute xmlns:xsi
+
+2013-06-12 14:53:38,782 - [DEBUG] - from net.sf.ehcache.config.BeanHandler in New I/O  worker #1 
+Ignoring ehcache attribute xsi:noNamespaceSchemaLocation
+
+2013-06-12 14:53:38,794 - [DEBUG] - from net.sf.ehcache.CacheManager in New I/O  worker #1 
+Creating new CacheManager with default config
+
+2013-06-12 14:53:38,797 - [DEBUG] - from net.sf.ehcache.util.PropertyUtil in New I/O  worker #1 
+propertiesString is null.
+
+2013-06-12 14:53:38,805 - [DEBUG] - from net.sf.ehcache.config.ConfigurationHelper in New I/O  worker #1 
+No CacheManagerEventListenerFactory class specified. Skipping...
+
+2013-06-12 14:53:38,820 - [DEBUG] - from net.sf.ehcache.Cache in New I/O  worker #1 
+No BootstrapCacheLoaderFactory class specified. Skipping...
+
+2013-06-12 14:53:38,821 - [DEBUG] - from net.sf.ehcache.Cache in New I/O  worker #1 
+CacheWriter factory not configured. Skipping...
+
+2013-06-12 14:53:38,822 - [DEBUG] - from net.sf.ehcache.config.ConfigurationHelper in New I/O  worker #1 
+No CacheExceptionHandlerFactory class specified. Skipping...
+
+2013-06-12 14:53:38,841 - [DEBUG] - from net.sf.ehcache.store.MemoryStore in New I/O  worker #1 
+Initialized net.sf.ehcache.store.NotifyingMemoryStore for play
+
+2013-06-12 14:53:38,845 - [DEBUG] - from net.sf.ehcache.Cache in New I/O  worker #1 
+Initialised cache: play
+
+2013-06-12 14:53:38,846 - [DEBUG] - from net.sf.ehcache.config.ConfigurationHelper in New I/O  worker #1 
+CacheDecoratorFactory not configured for defaultCache. Skipping for 'play'.
+
+2013-06-12 14:53:38,972 - [DEBUG] - from scalikejdbc.ConnectionPool$ in New I/O  worker #1 
+Registered connection pool : ConnectionPool(url:jdbc:h2:mem:play, user:)
+
+2013-06-12 14:53:38,972 - [DEBUG] - from scalikejdbc.ConnectionPool$ in New I/O  worker #1 
+Registered singleton connection pool : ConnectionPool(url:jdbc:h2:mem:play, user:)
+
+2013-06-12 14:53:38,973 - [WARN] - from scalikejdbc.PlayPlugin in New I/O  worker #1 
+Configuration with "db.global" is ignored. Use "scalikejdbc.global" instead.
+
+2013-06-12 14:53:39,161 - [ERROR] - from scalikejdbc.ActiveSession in New I/O  worker #1 
+Failed preparing the statement (Reason: Table "USERS" not found; SQL statement:
+select 1 from users limit 1 [42102-172]):
+
+  select 1 from users limit 1
+
+
+2013-06-12 14:53:39,194 - [WARN] - from scalikejdbc.StatementExecutor$$anon$1 in New I/O  worker #1 
+SQL execution completed
+
+  [SQL Execution]
+   drop table users if exists; create table users ( email varchar(255) not null primary key, name varchar(255) not null, password varchar(255) not null ); drop table project if exists; create table project ( id bigint not null primary key, name varchar(255) not null, folder varchar(255) not null ); drop sequence project_seq if exists; create sequence project_seq start with 1000; drop table project_member if exists; create table project_member ( project_id bigint not null, user_email varchar(255) not null, foreign key(project_id) references project(id) on delete cascade, foreign key(user_email) references users(email) on delete cascade ); drop table task if exists; create table task ( id bigint not null primary key, title varchar(255) not null, done boolean, due_date timestamp, assigned_to varchar(255), project bigint not null, folder varchar(255), foreign key(assigned_to) references users(email) on delete set null, foreign key(project) references project(id) on delete cascade ); drop sequence task_seq if exists; create sequence task_seq start with 1000;; (15 ms)
+
+  [Stack Trace]
+    ...
+    InitialData$$anonfun$1.apply(Global.scala:72)
+    InitialData$$anonfun$1.apply(Global.scala:68)
+    scalikejdbc.DB$$anonfun$autoCommit$2.apply(DB.scala:547)
+    scalikejdbc.DB$$anonfun$autoCommit$2.apply(DB.scala:546)
+    scalikejdbc.LoanPattern$.using(LoanPattern.scala:29)
+    scalikejdbc.package$.using(package.scala:76)
+    scalikejdbc.DB.autoCommit(DB.scala:546)
+    scalikejdbc.DB$$anonfun$autoCommit$1.apply(DB.scala:165)
+    scalikejdbc.DB$$anonfun$autoCommit$1.apply(DB.scala:164)
+    scalikejdbc.LoanPattern$.using(LoanPattern.scala:29)
+    scalikejdbc.package$.using(package.scala:76)
+    scalikejdbc.DB$.autoCommit(DB.scala:164)
+    InitialData$.createTables(Global.scala:68)
+    Global$.onStart(Global.scala:8)
+    play.api.GlobalPlugin.onStart(GlobalSettings.scala:175)
+    ...
+
+
+2013-06-12 14:53:39,230 - [DEBUG] - from scalikejdbc.StatementExecutor$$anon$1 in New I/O  worker #1 
+SQL execution completed
+
+  [SQL Execution]
+   select u.email as e_on_u, u.name as n_on_u, u.password as p_on_u from users u; (3 ms)
+
+  [Stack Trace]
+    ...
+    models.User$.findAll(User.scala:28)
+    InitialData$.insert(Global.scala:80)
+    Global$.onStart(Global.scala:9)
+    play.api.GlobalPlugin.onStart(GlobalSettings.scala:175)
+    play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:63)
+    play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:63)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    play.api.Play$$anonfun$start$1.apply$mcV$sp(Play.scala:63)
+    play.api.Play$$anonfun$start$1.apply(Play.scala:63)
+    play.api.Play$$anonfun$start$1.apply(Play.scala:63)
+    play.utils.Threads$.withContextClassLoader(Threads.scala:18)
+    play.api.Play$.start(Play.scala:62)
+    play.core.ReloadableApplication$$anonfun$get$1$$anonfun$1.apply(ApplicationProvider.scala:133)
+    play.core.ReloadableApplication$$anonfun$get$1$$anonfun$1.apply(ApplicationProvider.scala:106)
+    scala.Option.map(Option.scala:145)
+    ...
+
+
+2013-06-12 14:53:39,240 - [DEBUG] - from scalikejdbc.StatementExecutor$$anon$1 in New I/O  worker #1 
+SQL execution completed
+
+  [SQL Execution]
+   insert into users values ('guillaume@sample.com' , 'Guillaume Bort' , 'secret'); (1 ms)
+
+  [Stack Trace]
+    ...
+    models.User$.create(User.scala:35)
+    InitialData$$anonfun$insert$1.apply(Global.scala:87)
+    InitialData$$anonfun$insert$1.apply(Global.scala:87)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    InitialData$.insert(Global.scala:87)
+    Global$.onStart(Global.scala:9)
+    play.api.GlobalPlugin.onStart(GlobalSettings.scala:175)
+    play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:63)
+    play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:63)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    play.api.Play$$anonfun$start$1.apply$mcV$sp(Play.scala:63)
+    play.api.Play$$anonfun$start$1.apply(Play.scala:63)
+    play.api.Play$$anonfun$start$1.apply(Play.scala:63)
+    play.utils.Threads$.withContextClassLoader(Threads.scala:18)
+    play.api.Play$.start(Play.scala:62)
+    ...
+
+
+2013-06-12 14:53:39,242 - [DEBUG] - from scalikejdbc.StatementExecutor$$anon$1 in New I/O  worker #1 
+SQL execution completed
+
+  [SQL Execution]
+   insert into users values ('maxime@sample.com' , 'Maxime Dantec' , 'secret'); (0 ms)
+
+  [Stack Trace]
+    ...
+    models.User$.create(User.scala:35)
+    InitialData$$anonfun$insert$1.apply(Global.scala:87)
+    InitialData$$anonfun$insert$1.apply(Global.scala:87)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    InitialData$.insert(Global.scala:87)
+    Global$.onStart(Global.scala:9)
+    play.api.GlobalPlugin.onStart(GlobalSettings.scala:175)
+    play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:63)
+    play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:63)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    play.api.Play$$anonfun$start$1.apply$mcV$sp(Play.scala:63)
+    play.api.Play$$anonfun$start$1.apply(Play.scala:63)
+    play.api.Play$$anonfun$start$1.apply(Play.scala:63)
+    play.utils.Threads$.withContextClassLoader(Threads.scala:18)
+    play.api.Play$.start(Play.scala:62)
+    ...
+
+
+2013-06-12 14:53:39,246 - [DEBUG] - from scalikejdbc.StatementExecutor$$anon$1 in New I/O  worker #1 
+SQL execution completed
+
+  [SQL Execution]
+   insert into users values ('sadek@sample.com' , 'Sadek Drobi' , 'secret'); (0 ms)
+
+  [Stack Trace]
+    ...
+    models.User$.create(User.scala:35)
+    InitialData$$anonfun$insert$1.apply(Global.scala:87)
+    InitialData$$anonfun$insert$1.apply(Global.scala:87)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    InitialData$.insert(Global.scala:87)
+    Global$.onStart(Global.scala:9)
+    play.api.GlobalPlugin.onStart(GlobalSettings.scala:175)
+    play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:63)
+    play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:63)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    play.api.Play$$anonfun$start$1.apply$mcV$sp(Play.scala:63)
+    play.api.Play$$anonfun$start$1.apply(Play.scala:63)
+    play.api.Play$$anonfun$start$1.apply(Play.scala:63)
+    play.utils.Threads$.withContextClassLoader(Threads.scala:18)
+    play.api.Play$.start(Play.scala:62)
+    ...
+
+
+2013-06-12 14:53:39,248 - [DEBUG] - from scalikejdbc.StatementExecutor$$anon$1 in New I/O  worker #1 
+SQL execution completed
+
+  [SQL Execution]
+   insert into users values ('erwan@sample.com' , 'Erwan Loisant' , 'secret'); (0 ms)
+
+  [Stack Trace]
+    ...
+    models.User$.create(User.scala:35)
+    InitialData$$anonfun$insert$1.apply(Global.scala:87)
+    InitialData$$anonfun$insert$1.apply(Global.scala:87)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    InitialData$.insert(Global.scala:87)
+    Global$.onStart(Global.scala:9)
+    play.api.GlobalPlugin.onStart(GlobalSettings.scala:175)
+    play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:63)
+    play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:63)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    play.api.Play$$anonfun$start$1.apply$mcV$sp(Play.scala:63)
+    play.api.Play$$anonfun$start$1.apply(Play.scala:63)
+    play.api.Play$$anonfun$start$1.apply(Play.scala:63)
+    play.utils.Threads$.withContextClassLoader(Threads.scala:18)
+    play.api.Play$.start(Play.scala:62)
+    ...
+
+
+2013-06-12 14:53:39,304 - [DEBUG] - from scalikejdbc.StatementExecutor$$anon$1 in New I/O  worker #1 
+SQL execution completed
+
+  [SQL Execution]
+   select next value for project_seq as v from dual; (1 ms)
+
+  [Stack Trace]
+    ...
+    models.Project$.create(Project.scala:90)
+    InitialData$$anonfun$3.apply(Global.scala:102)
+    InitialData$$anonfun$3.apply(Global.scala:101)
+    scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:244)
+    scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:244)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    scala.collection.TraversableLike$class.map(TraversableLike.scala:244)
+    scala.collection.AbstractTraversable.map(Traversable.scala:105)
+    InitialData$.insert(Global.scala:101)
+    Global$.onStart(Global.scala:9)
+    play.api.GlobalPlugin.onStart(GlobalSettings.scala:175)
+    play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:63)
+    play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:63)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    play.api.Play$$anonfun$start$1.apply$mcV$sp(Play.scala:63)
+    ...
+
+
+2013-06-12 14:53:39,311 - [DEBUG] - from scalikejdbc.StatementExecutor$$anon$1 in New I/O  worker #1 
+SQL execution completed
+
+  [SQL Execution]
+   insert into project values (1000 , 'Play 2.0' , 'Play framework'); (0 ms)
+
+  [Stack Trace]
+    ...
+    models.Project$.create(Project.scala:91)
+    InitialData$$anonfun$3.apply(Global.scala:102)
+    InitialData$$anonfun$3.apply(Global.scala:101)
+    scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:244)
+    scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:244)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    scala.collection.TraversableLike$class.map(TraversableLike.scala:244)
+    scala.collection.AbstractTraversable.map(Traversable.scala:105)
+    InitialData$.insert(Global.scala:101)
+    Global$.onStart(Global.scala:9)
+    play.api.GlobalPlugin.onStart(GlobalSettings.scala:175)
+    play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:63)
+    play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:63)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    play.api.Play$$anonfun$start$1.apply$mcV$sp(Play.scala:63)
+    ...
+
+
+2013-06-12 14:53:39,314 - [DEBUG] - from scalikejdbc.StatementExecutor$$anon$1 in New I/O  worker #1 
+SQL execution completed
+
+  [SQL Execution]
+   insert into project_member values (1000 , 'guillaume@sample.com'); (0 ms)
+
+  [Stack Trace]
+    ...
+    models.Project$$anonfun$create$1.apply(Project.scala:93)
+    models.Project$$anonfun$create$1.apply(Project.scala:93)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    models.Project$.create(Project.scala:93)
+    InitialData$$anonfun$3.apply(Global.scala:102)
+    InitialData$$anonfun$3.apply(Global.scala:101)
+    scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:244)
+    scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:244)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    scala.collection.TraversableLike$class.map(TraversableLike.scala:244)
+    scala.collection.AbstractTraversable.map(Traversable.scala:105)
+    InitialData$.insert(Global.scala:101)
+    Global$.onStart(Global.scala:9)
+    play.api.GlobalPlugin.onStart(GlobalSettings.scala:175)
+    play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:63)
+    ...
+
+
+2013-06-12 14:53:39,317 - [DEBUG] - from scalikejdbc.StatementExecutor$$anon$1 in New I/O  worker #1 
+SQL execution completed
+
+  [SQL Execution]
+   insert into project_member values (1000 , 'maxime@sample.com'); (0 ms)
+
+  [Stack Trace]
+    ...
+    models.Project$$anonfun$create$1.apply(Project.scala:93)
+    models.Project$$anonfun$create$1.apply(Project.scala:93)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    models.Project$.create(Project.scala:93)
+    InitialData$$anonfun$3.apply(Global.scala:102)
+    InitialData$$anonfun$3.apply(Global.scala:101)
+    scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:244)
+    scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:244)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    scala.collection.TraversableLike$class.map(TraversableLike.scala:244)
+    scala.collection.AbstractTraversable.map(Traversable.scala:105)
+    InitialData$.insert(Global.scala:101)
+    Global$.onStart(Global.scala:9)
+    play.api.GlobalPlugin.onStart(GlobalSettings.scala:175)
+    play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:63)
+    ...
+
+
+2013-06-12 14:53:39,320 - [DEBUG] - from scalikejdbc.StatementExecutor$$anon$1 in New I/O  worker #1 
+SQL execution completed
+
+  [SQL Execution]
+   insert into project_member values (1000 , 'sadek@sample.com'); (0 ms)
+
+  [Stack Trace]
+    ...
+    models.Project$$anonfun$create$1.apply(Project.scala:93)
+    models.Project$$anonfun$create$1.apply(Project.scala:93)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    models.Project$.create(Project.scala:93)
+    InitialData$$anonfun$3.apply(Global.scala:102)
+    InitialData$$anonfun$3.apply(Global.scala:101)
+    scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:244)
+    scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:244)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    scala.collection.TraversableLike$class.map(TraversableLike.scala:244)
+    scala.collection.AbstractTraversable.map(Traversable.scala:105)
+    InitialData$.insert(Global.scala:101)
+    Global$.onStart(Global.scala:9)
+    play.api.GlobalPlugin.onStart(GlobalSettings.scala:175)
+    play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:63)
+    ...
+
+
+2013-06-12 14:53:39,322 - [DEBUG] - from scalikejdbc.StatementExecutor$$anon$1 in New I/O  worker #1 
+SQL execution completed
+
+  [SQL Execution]
+   insert into project_member values (1000 , 'erwan@sample.com'); (0 ms)
+
+  [Stack Trace]
+    ...
+    models.Project$$anonfun$create$1.apply(Project.scala:93)
+    models.Project$$anonfun$create$1.apply(Project.scala:93)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    models.Project$.create(Project.scala:93)
+    InitialData$$anonfun$3.apply(Global.scala:102)
+    InitialData$$anonfun$3.apply(Global.scala:101)
+    scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:244)
+    scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:244)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    scala.collection.TraversableLike$class.map(TraversableLike.scala:244)
+    scala.collection.AbstractTraversable.map(Traversable.scala:105)
+    InitialData$.insert(Global.scala:101)
+    Global$.onStart(Global.scala:9)
+    play.api.GlobalPlugin.onStart(GlobalSettings.scala:175)
+    play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:63)
+    ...
+
+
+2013-06-12 14:53:39,325 - [DEBUG] - from scalikejdbc.StatementExecutor$$anon$1 in New I/O  worker #1 
+SQL execution completed
+
+  [SQL Execution]
+   select next value for project_seq as v from dual; (0 ms)
+
+  [Stack Trace]
+    ...
+    models.Project$.create(Project.scala:90)
+    InitialData$$anonfun$3.apply(Global.scala:102)
+    InitialData$$anonfun$3.apply(Global.scala:101)
+    scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:244)
+    scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:244)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    scala.collection.TraversableLike$class.map(TraversableLike.scala:244)
+    scala.collection.AbstractTraversable.map(Traversable.scala:105)
+    InitialData$.insert(Global.scala:101)
+    Global$.onStart(Global.scala:9)
+    play.api.GlobalPlugin.onStart(GlobalSettings.scala:175)
+    play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:63)
+    play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:63)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    play.api.Play$$anonfun$start$1.apply$mcV$sp(Play.scala:63)
+    ...
+
+
+2013-06-12 14:53:39,327 - [DEBUG] - from scalikejdbc.StatementExecutor$$anon$1 in New I/O  worker #1 
+SQL execution completed
+
+  [SQL Execution]
+   insert into project values (1001 , 'Play 1.2.4' , 'Play framework'); (0 ms)
+
+  [Stack Trace]
+    ...
+    models.Project$.create(Project.scala:91)
+    InitialData$$anonfun$3.apply(Global.scala:102)
+    InitialData$$anonfun$3.apply(Global.scala:101)
+    scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:244)
+    scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:244)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    scala.collection.TraversableLike$class.map(TraversableLike.scala:244)
+    scala.collection.AbstractTraversable.map(Traversable.scala:105)
+    InitialData$.insert(Global.scala:101)
+    Global$.onStart(Global.scala:9)
+    play.api.GlobalPlugin.onStart(GlobalSettings.scala:175)
+    play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:63)
+    play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:63)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    play.api.Play$$anonfun$start$1.apply$mcV$sp(Play.scala:63)
+    ...
+
+
+2013-06-12 14:53:39,330 - [DEBUG] - from scalikejdbc.StatementExecutor$$anon$1 in New I/O  worker #1 
+SQL execution completed
+
+  [SQL Execution]
+   insert into project_member values (1001 , 'guillaume@sample.com'); (0 ms)
+
+  [Stack Trace]
+    ...
+    models.Project$$anonfun$create$1.apply(Project.scala:93)
+    models.Project$$anonfun$create$1.apply(Project.scala:93)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    models.Project$.create(Project.scala:93)
+    InitialData$$anonfun$3.apply(Global.scala:102)
+    InitialData$$anonfun$3.apply(Global.scala:101)
+    scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:244)
+    scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:244)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    scala.collection.TraversableLike$class.map(TraversableLike.scala:244)
+    scala.collection.AbstractTraversable.map(Traversable.scala:105)
+    InitialData$.insert(Global.scala:101)
+    Global$.onStart(Global.scala:9)
+    play.api.GlobalPlugin.onStart(GlobalSettings.scala:175)
+    play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:63)
+    ...
+
+
+2013-06-12 14:53:39,332 - [DEBUG] - from scalikejdbc.StatementExecutor$$anon$1 in New I/O  worker #1 
+SQL execution completed
+
+  [SQL Execution]
+   insert into project_member values (1001 , 'erwan@sample.com'); (0 ms)
+
+  [Stack Trace]
+    ...
+    models.Project$$anonfun$create$1.apply(Project.scala:93)
+    models.Project$$anonfun$create$1.apply(Project.scala:93)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    models.Project$.create(Project.scala:93)
+    InitialData$$anonfun$3.apply(Global.scala:102)
+    InitialData$$anonfun$3.apply(Global.scala:101)
+    scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:244)
+    scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:244)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    scala.collection.TraversableLike$class.map(TraversableLike.scala:244)
+    scala.collection.AbstractTraversable.map(Traversable.scala:105)
+    InitialData$.insert(Global.scala:101)
+    Global$.onStart(Global.scala:9)
+    play.api.GlobalPlugin.onStart(GlobalSettings.scala:175)
+    play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:63)
+    ...
+
+
+2013-06-12 14:53:39,334 - [DEBUG] - from scalikejdbc.StatementExecutor$$anon$1 in New I/O  worker #1 
+SQL execution completed
+
+  [SQL Execution]
+   select next value for project_seq as v from dual; (0 ms)
+
+  [Stack Trace]
+    ...
+    models.Project$.create(Project.scala:90)
+    InitialData$$anonfun$3.apply(Global.scala:102)
+    InitialData$$anonfun$3.apply(Global.scala:101)
+    scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:244)
+    scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:244)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    scala.collection.TraversableLike$class.map(TraversableLike.scala:244)
+    scala.collection.AbstractTraversable.map(Traversable.scala:105)
+    InitialData$.insert(Global.scala:101)
+    Global$.onStart(Global.scala:9)
+    play.api.GlobalPlugin.onStart(GlobalSettings.scala:175)
+    play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:63)
+    play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:63)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    play.api.Play$$anonfun$start$1.apply$mcV$sp(Play.scala:63)
+    ...
+
+
+2013-06-12 14:53:39,337 - [DEBUG] - from scalikejdbc.StatementExecutor$$anon$1 in New I/O  worker #1 
+SQL execution completed
+
+  [SQL Execution]
+   insert into project values (1002 , 'Website' , 'Play framework'); (0 ms)
+
+  [Stack Trace]
+    ...
+    models.Project$.create(Project.scala:91)
+    InitialData$$anonfun$3.apply(Global.scala:102)
+    InitialData$$anonfun$3.apply(Global.scala:101)
+    scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:244)
+    scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:244)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    scala.collection.TraversableLike$class.map(TraversableLike.scala:244)
+    scala.collection.AbstractTraversable.map(Traversable.scala:105)
+    InitialData$.insert(Global.scala:101)
+    Global$.onStart(Global.scala:9)
+    play.api.GlobalPlugin.onStart(GlobalSettings.scala:175)
+    play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:63)
+    play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:63)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    play.api.Play$$anonfun$start$1.apply$mcV$sp(Play.scala:63)
+    ...
+
+
+2013-06-12 14:53:39,339 - [DEBUG] - from scalikejdbc.StatementExecutor$$anon$1 in New I/O  worker #1 
+SQL execution completed
+
+  [SQL Execution]
+   insert into project_member values (1002 , 'guillaume@sample.com'); (0 ms)
+
+  [Stack Trace]
+    ...
+    models.Project$$anonfun$create$1.apply(Project.scala:93)
+    models.Project$$anonfun$create$1.apply(Project.scala:93)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    models.Project$.create(Project.scala:93)
+    InitialData$$anonfun$3.apply(Global.scala:102)
+    InitialData$$anonfun$3.apply(Global.scala:101)
+    scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:244)
+    scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:244)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    scala.collection.TraversableLike$class.map(TraversableLike.scala:244)
+    scala.collection.AbstractTraversable.map(Traversable.scala:105)
+    InitialData$.insert(Global.scala:101)
+    Global$.onStart(Global.scala:9)
+    play.api.GlobalPlugin.onStart(GlobalSettings.scala:175)
+    play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:63)
+    ...
+
+
+2013-06-12 14:53:39,342 - [DEBUG] - from scalikejdbc.StatementExecutor$$anon$1 in New I/O  worker #1 
+SQL execution completed
+
+  [SQL Execution]
+   insert into project_member values (1002 , 'maxime@sample.com'); (0 ms)
+
+  [Stack Trace]
+    ...
+    models.Project$$anonfun$create$1.apply(Project.scala:93)
+    models.Project$$anonfun$create$1.apply(Project.scala:93)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    models.Project$.create(Project.scala:93)
+    InitialData$$anonfun$3.apply(Global.scala:102)
+    InitialData$$anonfun$3.apply(Global.scala:101)
+    scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:244)
+    scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:244)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    scala.collection.TraversableLike$class.map(TraversableLike.scala:244)
+    scala.collection.AbstractTraversable.map(Traversable.scala:105)
+    InitialData$.insert(Global.scala:101)
+    Global$.onStart(Global.scala:9)
+    play.api.GlobalPlugin.onStart(GlobalSettings.scala:175)
+    play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:63)
+    ...
+
+
+2013-06-12 14:53:39,347 - [DEBUG] - from scalikejdbc.StatementExecutor$$anon$1 in New I/O  worker #1 
+SQL execution completed
+
+  [SQL Execution]
+   select next value for project_seq as v from dual; (0 ms)
+
+  [Stack Trace]
+    ...
+    models.Project$.create(Project.scala:90)
+    InitialData$$anonfun$3.apply(Global.scala:102)
+    InitialData$$anonfun$3.apply(Global.scala:101)
+    scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:244)
+    scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:244)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    scala.collection.TraversableLike$class.map(TraversableLike.scala:244)
+    scala.collection.AbstractTraversable.map(Traversable.scala:105)
+    InitialData$.insert(Global.scala:101)
+    Global$.onStart(Global.scala:9)
+    play.api.GlobalPlugin.onStart(GlobalSettings.scala:175)
+    play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:63)
+    play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:63)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    play.api.Play$$anonfun$start$1.apply$mcV$sp(Play.scala:63)
+    ...
+
+
+2013-06-12 14:53:39,350 - [DEBUG] - from scalikejdbc.StatementExecutor$$anon$1 in New I/O  worker #1 
+SQL execution completed
+
+  [SQL Execution]
+   insert into project values (1003 , 'Secret project' , 'Zenexity'); (0 ms)
+
+  [Stack Trace]
+    ...
+    models.Project$.create(Project.scala:91)
+    InitialData$$anonfun$3.apply(Global.scala:102)
+    InitialData$$anonfun$3.apply(Global.scala:101)
+    scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:244)
+    scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:244)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    scala.collection.TraversableLike$class.map(TraversableLike.scala:244)
+    scala.collection.AbstractTraversable.map(Traversable.scala:105)
+    InitialData$.insert(Global.scala:101)
+    Global$.onStart(Global.scala:9)
+    play.api.GlobalPlugin.onStart(GlobalSettings.scala:175)
+    play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:63)
+    play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:63)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    play.api.Play$$anonfun$start$1.apply$mcV$sp(Play.scala:63)
+    ...
+
+
+2013-06-12 14:53:39,352 - [DEBUG] - from scalikejdbc.StatementExecutor$$anon$1 in New I/O  worker #1 
+SQL execution completed
+
+  [SQL Execution]
+   insert into project_member values (1003 , 'guillaume@sample.com'); (0 ms)
+
+  [Stack Trace]
+    ...
+    models.Project$$anonfun$create$1.apply(Project.scala:93)
+    models.Project$$anonfun$create$1.apply(Project.scala:93)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    models.Project$.create(Project.scala:93)
+    InitialData$$anonfun$3.apply(Global.scala:102)
+    InitialData$$anonfun$3.apply(Global.scala:101)
+    scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:244)
+    scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:244)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    scala.collection.TraversableLike$class.map(TraversableLike.scala:244)
+    scala.collection.AbstractTraversable.map(Traversable.scala:105)
+    InitialData$.insert(Global.scala:101)
+    Global$.onStart(Global.scala:9)
+    play.api.GlobalPlugin.onStart(GlobalSettings.scala:175)
+    play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:63)
+    ...
+
+
+2013-06-12 14:53:39,354 - [DEBUG] - from scalikejdbc.StatementExecutor$$anon$1 in New I/O  worker #1 
+SQL execution completed
+
+  [SQL Execution]
+   insert into project_member values (1003 , 'maxime@sample.com'); (0 ms)
+
+  [Stack Trace]
+    ...
+    models.Project$$anonfun$create$1.apply(Project.scala:93)
+    models.Project$$anonfun$create$1.apply(Project.scala:93)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    models.Project$.create(Project.scala:93)
+    InitialData$$anonfun$3.apply(Global.scala:102)
+    InitialData$$anonfun$3.apply(Global.scala:101)
+    scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:244)
+    scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:244)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    scala.collection.TraversableLike$class.map(TraversableLike.scala:244)
+    scala.collection.AbstractTraversable.map(Traversable.scala:105)
+    InitialData$.insert(Global.scala:101)
+    Global$.onStart(Global.scala:9)
+    play.api.GlobalPlugin.onStart(GlobalSettings.scala:175)
+    play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:63)
+    ...
+
+
+2013-06-12 14:53:39,356 - [DEBUG] - from scalikejdbc.StatementExecutor$$anon$1 in New I/O  worker #1 
+SQL execution completed
+
+  [SQL Execution]
+   insert into project_member values (1003 , 'sadek@sample.com'); (0 ms)
+
+  [Stack Trace]
+    ...
+    models.Project$$anonfun$create$1.apply(Project.scala:93)
+    models.Project$$anonfun$create$1.apply(Project.scala:93)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    models.Project$.create(Project.scala:93)
+    InitialData$$anonfun$3.apply(Global.scala:102)
+    InitialData$$anonfun$3.apply(Global.scala:101)
+    scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:244)
+    scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:244)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    scala.collection.TraversableLike$class.map(TraversableLike.scala:244)
+    scala.collection.AbstractTraversable.map(Traversable.scala:105)
+    InitialData$.insert(Global.scala:101)
+    Global$.onStart(Global.scala:9)
+    play.api.GlobalPlugin.onStart(GlobalSettings.scala:175)
+    play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:63)
+    ...
+
+
+2013-06-12 14:53:39,358 - [DEBUG] - from scalikejdbc.StatementExecutor$$anon$1 in New I/O  worker #1 
+SQL execution completed
+
+  [SQL Execution]
+   insert into project_member values (1003 , 'erwan@sample.com'); (0 ms)
+
+  [Stack Trace]
+    ...
+    models.Project$$anonfun$create$1.apply(Project.scala:93)
+    models.Project$$anonfun$create$1.apply(Project.scala:93)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    models.Project$.create(Project.scala:93)
+    InitialData$$anonfun$3.apply(Global.scala:102)
+    InitialData$$anonfun$3.apply(Global.scala:101)
+    scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:244)
+    scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:244)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    scala.collection.TraversableLike$class.map(TraversableLike.scala:244)
+    scala.collection.AbstractTraversable.map(Traversable.scala:105)
+    InitialData$.insert(Global.scala:101)
+    Global$.onStart(Global.scala:9)
+    play.api.GlobalPlugin.onStart(GlobalSettings.scala:175)
+    play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:63)
+    ...
+
+
+2013-06-12 14:53:39,360 - [DEBUG] - from scalikejdbc.StatementExecutor$$anon$1 in New I/O  worker #1 
+SQL execution completed
+
+  [SQL Execution]
+   select next value for project_seq as v from dual; (0 ms)
+
+  [Stack Trace]
+    ...
+    models.Project$.create(Project.scala:90)
+    InitialData$$anonfun$3.apply(Global.scala:102)
+    InitialData$$anonfun$3.apply(Global.scala:101)
+    scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:244)
+    scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:244)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    scala.collection.TraversableLike$class.map(TraversableLike.scala:244)
+    scala.collection.AbstractTraversable.map(Traversable.scala:105)
+    InitialData$.insert(Global.scala:101)
+    Global$.onStart(Global.scala:9)
+    play.api.GlobalPlugin.onStart(GlobalSettings.scala:175)
+    play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:63)
+    play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:63)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    play.api.Play$$anonfun$start$1.apply$mcV$sp(Play.scala:63)
+    ...
+
+
+2013-06-12 14:53:39,362 - [DEBUG] - from scalikejdbc.StatementExecutor$$anon$1 in New I/O  worker #1 
+SQL execution completed
+
+  [SQL Execution]
+   insert into project values (1004 , 'Playmate' , 'Zenexity'); (0 ms)
+
+  [Stack Trace]
+    ...
+    models.Project$.create(Project.scala:91)
+    InitialData$$anonfun$3.apply(Global.scala:102)
+    InitialData$$anonfun$3.apply(Global.scala:101)
+    scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:244)
+    scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:244)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    scala.collection.TraversableLike$class.map(TraversableLike.scala:244)
+    scala.collection.AbstractTraversable.map(Traversable.scala:105)
+    InitialData$.insert(Global.scala:101)
+    Global$.onStart(Global.scala:9)
+    play.api.GlobalPlugin.onStart(GlobalSettings.scala:175)
+    play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:63)
+    play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:63)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    play.api.Play$$anonfun$start$1.apply$mcV$sp(Play.scala:63)
+    ...
+
+
+2013-06-12 14:53:39,365 - [DEBUG] - from scalikejdbc.StatementExecutor$$anon$1 in New I/O  worker #1 
+SQL execution completed
+
+  [SQL Execution]
+   insert into project_member values (1004 , 'maxime@sample.com'); (0 ms)
+
+  [Stack Trace]
+    ...
+    models.Project$$anonfun$create$1.apply(Project.scala:93)
+    models.Project$$anonfun$create$1.apply(Project.scala:93)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    models.Project$.create(Project.scala:93)
+    InitialData$$anonfun$3.apply(Global.scala:102)
+    InitialData$$anonfun$3.apply(Global.scala:101)
+    scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:244)
+    scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:244)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    scala.collection.TraversableLike$class.map(TraversableLike.scala:244)
+    scala.collection.AbstractTraversable.map(Traversable.scala:105)
+    InitialData$.insert(Global.scala:101)
+    Global$.onStart(Global.scala:9)
+    play.api.GlobalPlugin.onStart(GlobalSettings.scala:175)
+    play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:63)
+    ...
+
+
+2013-06-12 14:53:39,367 - [DEBUG] - from scalikejdbc.StatementExecutor$$anon$1 in New I/O  worker #1 
+SQL execution completed
+
+  [SQL Execution]
+   select next value for project_seq as v from dual; (0 ms)
+
+  [Stack Trace]
+    ...
+    models.Project$.create(Project.scala:90)
+    InitialData$$anonfun$3.apply(Global.scala:102)
+    InitialData$$anonfun$3.apply(Global.scala:101)
+    scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:244)
+    scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:244)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    scala.collection.TraversableLike$class.map(TraversableLike.scala:244)
+    scala.collection.AbstractTraversable.map(Traversable.scala:105)
+    InitialData$.insert(Global.scala:101)
+    Global$.onStart(Global.scala:9)
+    play.api.GlobalPlugin.onStart(GlobalSettings.scala:175)
+    play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:63)
+    play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:63)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    play.api.Play$$anonfun$start$1.apply$mcV$sp(Play.scala:63)
+    ...
+
+
+2013-06-12 14:53:39,369 - [DEBUG] - from scalikejdbc.StatementExecutor$$anon$1 in New I/O  worker #1 
+SQL execution completed
+
+  [SQL Execution]
+   insert into project values (1005 , 'Things to do' , 'Personal'); (0 ms)
+
+  [Stack Trace]
+    ...
+    models.Project$.create(Project.scala:91)
+    InitialData$$anonfun$3.apply(Global.scala:102)
+    InitialData$$anonfun$3.apply(Global.scala:101)
+    scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:244)
+    scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:244)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    scala.collection.TraversableLike$class.map(TraversableLike.scala:244)
+    scala.collection.AbstractTraversable.map(Traversable.scala:105)
+    InitialData$.insert(Global.scala:101)
+    Global$.onStart(Global.scala:9)
+    play.api.GlobalPlugin.onStart(GlobalSettings.scala:175)
+    play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:63)
+    play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:63)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    play.api.Play$$anonfun$start$1.apply$mcV$sp(Play.scala:63)
+    ...
+
+
+2013-06-12 14:53:39,371 - [DEBUG] - from scalikejdbc.StatementExecutor$$anon$1 in New I/O  worker #1 
+SQL execution completed
+
+  [SQL Execution]
+   insert into project_member values (1005 , 'guillaume@sample.com'); (0 ms)
+
+  [Stack Trace]
+    ...
+    models.Project$$anonfun$create$1.apply(Project.scala:93)
+    models.Project$$anonfun$create$1.apply(Project.scala:93)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    models.Project$.create(Project.scala:93)
+    InitialData$$anonfun$3.apply(Global.scala:102)
+    InitialData$$anonfun$3.apply(Global.scala:101)
+    scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:244)
+    scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:244)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    scala.collection.TraversableLike$class.map(TraversableLike.scala:244)
+    scala.collection.AbstractTraversable.map(Traversable.scala:105)
+    InitialData$.insert(Global.scala:101)
+    Global$.onStart(Global.scala:9)
+    play.api.GlobalPlugin.onStart(GlobalSettings.scala:175)
+    play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:63)
+    ...
+
+
+2013-06-12 14:53:39,372 - [DEBUG] - from scalikejdbc.StatementExecutor$$anon$1 in New I/O  worker #1 
+SQL execution completed
+
+  [SQL Execution]
+   select next value for project_seq as v from dual; (0 ms)
+
+  [Stack Trace]
+    ...
+    models.Project$.create(Project.scala:90)
+    InitialData$$anonfun$3.apply(Global.scala:102)
+    InitialData$$anonfun$3.apply(Global.scala:101)
+    scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:244)
+    scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:244)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    scala.collection.TraversableLike$class.map(TraversableLike.scala:244)
+    scala.collection.AbstractTraversable.map(Traversable.scala:105)
+    InitialData$.insert(Global.scala:101)
+    Global$.onStart(Global.scala:9)
+    play.api.GlobalPlugin.onStart(GlobalSettings.scala:175)
+    play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:63)
+    play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:63)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    play.api.Play$$anonfun$start$1.apply$mcV$sp(Play.scala:63)
+    ...
+
+
+2013-06-12 14:53:39,374 - [DEBUG] - from scalikejdbc.StatementExecutor$$anon$1 in New I/O  worker #1 
+SQL execution completed
+
+  [SQL Execution]
+   insert into project values (1006 , 'Play samples' , 'Zenexity'); (0 ms)
+
+  [Stack Trace]
+    ...
+    models.Project$.create(Project.scala:91)
+    InitialData$$anonfun$3.apply(Global.scala:102)
+    InitialData$$anonfun$3.apply(Global.scala:101)
+    scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:244)
+    scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:244)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    scala.collection.TraversableLike$class.map(TraversableLike.scala:244)
+    scala.collection.AbstractTraversable.map(Traversable.scala:105)
+    InitialData$.insert(Global.scala:101)
+    Global$.onStart(Global.scala:9)
+    play.api.GlobalPlugin.onStart(GlobalSettings.scala:175)
+    play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:63)
+    play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:63)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    play.api.Play$$anonfun$start$1.apply$mcV$sp(Play.scala:63)
+    ...
+
+
+2013-06-12 14:53:39,376 - [DEBUG] - from scalikejdbc.StatementExecutor$$anon$1 in New I/O  worker #1 
+SQL execution completed
+
+  [SQL Execution]
+   insert into project_member values (1006 , 'guillaume@sample.com'); (1 ms)
+
+  [Stack Trace]
+    ...
+    models.Project$$anonfun$create$1.apply(Project.scala:93)
+    models.Project$$anonfun$create$1.apply(Project.scala:93)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    models.Project$.create(Project.scala:93)
+    InitialData$$anonfun$3.apply(Global.scala:102)
+    InitialData$$anonfun$3.apply(Global.scala:101)
+    scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:244)
+    scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:244)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    scala.collection.TraversableLike$class.map(TraversableLike.scala:244)
+    scala.collection.AbstractTraversable.map(Traversable.scala:105)
+    InitialData$.insert(Global.scala:101)
+    Global$.onStart(Global.scala:9)
+    play.api.GlobalPlugin.onStart(GlobalSettings.scala:175)
+    play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:63)
+    ...
+
+
+2013-06-12 14:53:39,378 - [DEBUG] - from scalikejdbc.StatementExecutor$$anon$1 in New I/O  worker #1 
+SQL execution completed
+
+  [SQL Execution]
+   insert into project_member values (1006 , 'maxime@sample.com'); (0 ms)
+
+  [Stack Trace]
+    ...
+    models.Project$$anonfun$create$1.apply(Project.scala:93)
+    models.Project$$anonfun$create$1.apply(Project.scala:93)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    models.Project$.create(Project.scala:93)
+    InitialData$$anonfun$3.apply(Global.scala:102)
+    InitialData$$anonfun$3.apply(Global.scala:101)
+    scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:244)
+    scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:244)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    scala.collection.TraversableLike$class.map(TraversableLike.scala:244)
+    scala.collection.AbstractTraversable.map(Traversable.scala:105)
+    InitialData$.insert(Global.scala:101)
+    Global$.onStart(Global.scala:9)
+    play.api.GlobalPlugin.onStart(GlobalSettings.scala:175)
+    play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:63)
+    ...
+
+
+2013-06-12 14:53:39,380 - [DEBUG] - from scalikejdbc.StatementExecutor$$anon$1 in New I/O  worker #1 
+SQL execution completed
+
+  [SQL Execution]
+   select next value for project_seq as v from dual; (0 ms)
+
+  [Stack Trace]
+    ...
+    models.Project$.create(Project.scala:90)
+    InitialData$$anonfun$3.apply(Global.scala:102)
+    InitialData$$anonfun$3.apply(Global.scala:101)
+    scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:244)
+    scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:244)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    scala.collection.TraversableLike$class.map(TraversableLike.scala:244)
+    scala.collection.AbstractTraversable.map(Traversable.scala:105)
+    InitialData$.insert(Global.scala:101)
+    Global$.onStart(Global.scala:9)
+    play.api.GlobalPlugin.onStart(GlobalSettings.scala:175)
+    play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:63)
+    play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:63)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    play.api.Play$$anonfun$start$1.apply$mcV$sp(Play.scala:63)
+    ...
+
+
+2013-06-12 14:53:39,382 - [DEBUG] - from scalikejdbc.StatementExecutor$$anon$1 in New I/O  worker #1 
+SQL execution completed
+
+  [SQL Execution]
+   insert into project values (1007 , 'Private' , 'Personal'); (0 ms)
+
+  [Stack Trace]
+    ...
+    models.Project$.create(Project.scala:91)
+    InitialData$$anonfun$3.apply(Global.scala:102)
+    InitialData$$anonfun$3.apply(Global.scala:101)
+    scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:244)
+    scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:244)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    scala.collection.TraversableLike$class.map(TraversableLike.scala:244)
+    scala.collection.AbstractTraversable.map(Traversable.scala:105)
+    InitialData$.insert(Global.scala:101)
+    Global$.onStart(Global.scala:9)
+    play.api.GlobalPlugin.onStart(GlobalSettings.scala:175)
+    play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:63)
+    play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:63)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    play.api.Play$$anonfun$start$1.apply$mcV$sp(Play.scala:63)
+    ...
+
+
+2013-06-12 14:53:39,389 - [DEBUG] - from scalikejdbc.StatementExecutor$$anon$1 in New I/O  worker #1 
+SQL execution completed
+
+  [SQL Execution]
+   insert into project_member values (1007 , 'maxime@sample.com'); (0 ms)
+
+  [Stack Trace]
+    ...
+    models.Project$$anonfun$create$1.apply(Project.scala:93)
+    models.Project$$anonfun$create$1.apply(Project.scala:93)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    models.Project$.create(Project.scala:93)
+    InitialData$$anonfun$3.apply(Global.scala:102)
+    InitialData$$anonfun$3.apply(Global.scala:101)
+    scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:244)
+    scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:244)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    scala.collection.TraversableLike$class.map(TraversableLike.scala:244)
+    scala.collection.AbstractTraversable.map(Traversable.scala:105)
+    InitialData$.insert(Global.scala:101)
+    Global$.onStart(Global.scala:9)
+    play.api.GlobalPlugin.onStart(GlobalSettings.scala:175)
+    play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:63)
+    ...
+
+
+2013-06-12 14:53:39,391 - [DEBUG] - from scalikejdbc.StatementExecutor$$anon$1 in New I/O  worker #1 
+SQL execution completed
+
+  [SQL Execution]
+   select next value for project_seq as v from dual; (0 ms)
+
+  [Stack Trace]
+    ...
+    models.Project$.create(Project.scala:90)
+    InitialData$$anonfun$3.apply(Global.scala:102)
+    InitialData$$anonfun$3.apply(Global.scala:101)
+    scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:244)
+    scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:244)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    scala.collection.TraversableLike$class.map(TraversableLike.scala:244)
+    scala.collection.AbstractTraversable.map(Traversable.scala:105)
+    InitialData$.insert(Global.scala:101)
+    Global$.onStart(Global.scala:9)
+    play.api.GlobalPlugin.onStart(GlobalSettings.scala:175)
+    play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:63)
+    play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:63)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    play.api.Play$$anonfun$start$1.apply$mcV$sp(Play.scala:63)
+    ...
+
+
+2013-06-12 14:53:39,393 - [DEBUG] - from scalikejdbc.StatementExecutor$$anon$1 in New I/O  worker #1 
+SQL execution completed
+
+  [SQL Execution]
+   insert into project values (1008 , 'Private' , 'Personal'); (0 ms)
+
+  [Stack Trace]
+    ...
+    models.Project$.create(Project.scala:91)
+    InitialData$$anonfun$3.apply(Global.scala:102)
+    InitialData$$anonfun$3.apply(Global.scala:101)
+    scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:244)
+    scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:244)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    scala.collection.TraversableLike$class.map(TraversableLike.scala:244)
+    scala.collection.AbstractTraversable.map(Traversable.scala:105)
+    InitialData$.insert(Global.scala:101)
+    Global$.onStart(Global.scala:9)
+    play.api.GlobalPlugin.onStart(GlobalSettings.scala:175)
+    play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:63)
+    play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:63)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    play.api.Play$$anonfun$start$1.apply$mcV$sp(Play.scala:63)
+    ...
+
+
+2013-06-12 14:53:39,395 - [DEBUG] - from scalikejdbc.StatementExecutor$$anon$1 in New I/O  worker #1 
+SQL execution completed
+
+  [SQL Execution]
+   insert into project_member values (1008 , 'guillaume@sample.com'); (0 ms)
+
+  [Stack Trace]
+    ...
+    models.Project$$anonfun$create$1.apply(Project.scala:93)
+    models.Project$$anonfun$create$1.apply(Project.scala:93)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    models.Project$.create(Project.scala:93)
+    InitialData$$anonfun$3.apply(Global.scala:102)
+    InitialData$$anonfun$3.apply(Global.scala:101)
+    scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:244)
+    scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:244)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    scala.collection.TraversableLike$class.map(TraversableLike.scala:244)
+    scala.collection.AbstractTraversable.map(Traversable.scala:105)
+    InitialData$.insert(Global.scala:101)
+    Global$.onStart(Global.scala:9)
+    play.api.GlobalPlugin.onStart(GlobalSettings.scala:175)
+    play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:63)
+    ...
+
+
+2013-06-12 14:53:39,396 - [DEBUG] - from scalikejdbc.StatementExecutor$$anon$1 in New I/O  worker #1 
+SQL execution completed
+
+  [SQL Execution]
+   select next value for project_seq as v from dual; (0 ms)
+
+  [Stack Trace]
+    ...
+    models.Project$.create(Project.scala:90)
+    InitialData$$anonfun$3.apply(Global.scala:102)
+    InitialData$$anonfun$3.apply(Global.scala:101)
+    scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:244)
+    scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:244)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    scala.collection.TraversableLike$class.map(TraversableLike.scala:244)
+    scala.collection.AbstractTraversable.map(Traversable.scala:105)
+    InitialData$.insert(Global.scala:101)
+    Global$.onStart(Global.scala:9)
+    play.api.GlobalPlugin.onStart(GlobalSettings.scala:175)
+    play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:63)
+    play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:63)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    play.api.Play$$anonfun$start$1.apply$mcV$sp(Play.scala:63)
+    ...
+
+
+2013-06-12 14:53:39,398 - [DEBUG] - from scalikejdbc.StatementExecutor$$anon$1 in New I/O  worker #1 
+SQL execution completed
+
+  [SQL Execution]
+   insert into project values (1009 , 'Private' , 'Personal'); (0 ms)
+
+  [Stack Trace]
+    ...
+    models.Project$.create(Project.scala:91)
+    InitialData$$anonfun$3.apply(Global.scala:102)
+    InitialData$$anonfun$3.apply(Global.scala:101)
+    scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:244)
+    scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:244)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    scala.collection.TraversableLike$class.map(TraversableLike.scala:244)
+    scala.collection.AbstractTraversable.map(Traversable.scala:105)
+    InitialData$.insert(Global.scala:101)
+    Global$.onStart(Global.scala:9)
+    play.api.GlobalPlugin.onStart(GlobalSettings.scala:175)
+    play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:63)
+    play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:63)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    play.api.Play$$anonfun$start$1.apply$mcV$sp(Play.scala:63)
+    ...
+
+
+2013-06-12 14:53:39,400 - [DEBUG] - from scalikejdbc.StatementExecutor$$anon$1 in New I/O  worker #1 
+SQL execution completed
+
+  [SQL Execution]
+   insert into project_member values (1009 , 'erwan@sample.com'); (1 ms)
+
+  [Stack Trace]
+    ...
+    models.Project$$anonfun$create$1.apply(Project.scala:93)
+    models.Project$$anonfun$create$1.apply(Project.scala:93)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    models.Project$.create(Project.scala:93)
+    InitialData$$anonfun$3.apply(Global.scala:102)
+    InitialData$$anonfun$3.apply(Global.scala:101)
+    scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:244)
+    scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:244)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    scala.collection.TraversableLike$class.map(TraversableLike.scala:244)
+    scala.collection.AbstractTraversable.map(Traversable.scala:105)
+    InitialData$.insert(Global.scala:101)
+    Global$.onStart(Global.scala:9)
+    play.api.GlobalPlugin.onStart(GlobalSettings.scala:175)
+    play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:63)
+    ...
+
+
+2013-06-12 14:53:39,402 - [DEBUG] - from scalikejdbc.StatementExecutor$$anon$1 in New I/O  worker #1 
+SQL execution completed
+
+  [SQL Execution]
+   select next value for project_seq as v from dual; (0 ms)
+
+  [Stack Trace]
+    ...
+    models.Project$.create(Project.scala:90)
+    InitialData$$anonfun$3.apply(Global.scala:102)
+    InitialData$$anonfun$3.apply(Global.scala:101)
+    scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:244)
+    scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:244)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    scala.collection.TraversableLike$class.map(TraversableLike.scala:244)
+    scala.collection.AbstractTraversable.map(Traversable.scala:105)
+    InitialData$.insert(Global.scala:101)
+    Global$.onStart(Global.scala:9)
+    play.api.GlobalPlugin.onStart(GlobalSettings.scala:175)
+    play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:63)
+    play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:63)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    play.api.Play$$anonfun$start$1.apply$mcV$sp(Play.scala:63)
+    ...
+
+
+2013-06-12 14:53:39,404 - [DEBUG] - from scalikejdbc.StatementExecutor$$anon$1 in New I/O  worker #1 
+SQL execution completed
+
+  [SQL Execution]
+   insert into project values (1010 , 'Private' , 'Personal'); (0 ms)
+
+  [Stack Trace]
+    ...
+    models.Project$.create(Project.scala:91)
+    InitialData$$anonfun$3.apply(Global.scala:102)
+    InitialData$$anonfun$3.apply(Global.scala:101)
+    scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:244)
+    scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:244)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    scala.collection.TraversableLike$class.map(TraversableLike.scala:244)
+    scala.collection.AbstractTraversable.map(Traversable.scala:105)
+    InitialData$.insert(Global.scala:101)
+    Global$.onStart(Global.scala:9)
+    play.api.GlobalPlugin.onStart(GlobalSettings.scala:175)
+    play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:63)
+    play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:63)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    play.api.Play$$anonfun$start$1.apply$mcV$sp(Play.scala:63)
+    ...
+
+
+2013-06-12 14:53:39,405 - [DEBUG] - from scalikejdbc.StatementExecutor$$anon$1 in New I/O  worker #1 
+SQL execution completed
+
+  [SQL Execution]
+   insert into project_member values (1010 , 'sadek@sample.com'); (0 ms)
+
+  [Stack Trace]
+    ...
+    models.Project$$anonfun$create$1.apply(Project.scala:93)
+    models.Project$$anonfun$create$1.apply(Project.scala:93)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    models.Project$.create(Project.scala:93)
+    InitialData$$anonfun$3.apply(Global.scala:102)
+    InitialData$$anonfun$3.apply(Global.scala:101)
+    scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:244)
+    scala.collection.TraversableLike$$anonfun$map$1.apply(TraversableLike.scala:244)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    scala.collection.TraversableLike$class.map(TraversableLike.scala:244)
+    scala.collection.AbstractTraversable.map(Traversable.scala:105)
+    InitialData$.insert(Global.scala:101)
+    Global$.onStart(Global.scala:9)
+    play.api.GlobalPlugin.onStart(GlobalSettings.scala:175)
+    play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:63)
+    ...
+
+
+2013-06-12 14:53:39,435 - [DEBUG] - from scalikejdbc.StatementExecutor$$anon$1 in New I/O  worker #1 
+SQL execution completed
+
+  [SQL Execution]
+   select next value for task_seq as v from dual; (0 ms)
+
+  [Stack Trace]
+    ...
+    models.Task$.create(Task.scala:94)
+    InitialData$$anonfun$insert$2.apply(Global.scala:112)
+    InitialData$$anonfun$insert$2.apply(Global.scala:112)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    InitialData$.insert(Global.scala:112)
+    Global$.onStart(Global.scala:9)
+    play.api.GlobalPlugin.onStart(GlobalSettings.scala:175)
+    play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:63)
+    play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:63)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    play.api.Play$$anonfun$start$1.apply$mcV$sp(Play.scala:63)
+    play.api.Play$$anonfun$start$1.apply(Play.scala:63)
+    play.api.Play$$anonfun$start$1.apply(Play.scala:63)
+    play.utils.Threads$.withContextClassLoader(Threads.scala:18)
+    play.api.Play$.start(Play.scala:62)
+    ...
+
+
+2013-06-12 14:53:39,438 - [DEBUG] - from scalikejdbc.StatementExecutor$$anon$1 in New I/O  worker #1 
+SQL execution completed
+
+  [SQL Execution]
+   insert into task values (1000 , 'Fix the documentation' , false , null , 'guillaume@sample.com' , 1000 , 'Todo'); (0 ms)
+
+  [Stack Trace]
+    ...
+    models.Task$.create(Task.scala:95)
+    InitialData$$anonfun$insert$2.apply(Global.scala:112)
+    InitialData$$anonfun$insert$2.apply(Global.scala:112)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    InitialData$.insert(Global.scala:112)
+    Global$.onStart(Global.scala:9)
+    play.api.GlobalPlugin.onStart(GlobalSettings.scala:175)
+    play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:63)
+    play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:63)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    play.api.Play$$anonfun$start$1.apply$mcV$sp(Play.scala:63)
+    play.api.Play$$anonfun$start$1.apply(Play.scala:63)
+    play.api.Play$$anonfun$start$1.apply(Play.scala:63)
+    play.utils.Threads$.withContextClassLoader(Threads.scala:18)
+    play.api.Play$.start(Play.scala:62)
+    ...
+
+
+2013-06-12 14:53:39,441 - [DEBUG] - from scalikejdbc.StatementExecutor$$anon$1 in New I/O  worker #1 
+SQL execution completed
+
+  [SQL Execution]
+   select next value for task_seq as v from dual; (0 ms)
+
+  [Stack Trace]
+    ...
+    models.Task$.create(Task.scala:94)
+    InitialData$$anonfun$insert$2.apply(Global.scala:112)
+    InitialData$$anonfun$insert$2.apply(Global.scala:112)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    InitialData$.insert(Global.scala:112)
+    Global$.onStart(Global.scala:9)
+    play.api.GlobalPlugin.onStart(GlobalSettings.scala:175)
+    play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:63)
+    play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:63)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    play.api.Play$$anonfun$start$1.apply$mcV$sp(Play.scala:63)
+    play.api.Play$$anonfun$start$1.apply(Play.scala:63)
+    play.api.Play$$anonfun$start$1.apply(Play.scala:63)
+    play.utils.Threads$.withContextClassLoader(Threads.scala:18)
+    play.api.Play$.start(Play.scala:62)
+    ...
+
+
+2013-06-12 14:53:39,446 - [DEBUG] - from scalikejdbc.StatementExecutor$$anon$1 in New I/O  worker #1 
+SQL execution completed
+
+  [SQL Execution]
+   insert into task values (1001 , 'Prepare the beta release' , false , '2011-11-15 00:00:00.0' , null , 1000 , 'Urgent'); (1 ms)
+
+  [Stack Trace]
+    ...
+    models.Task$.create(Task.scala:95)
+    InitialData$$anonfun$insert$2.apply(Global.scala:112)
+    InitialData$$anonfun$insert$2.apply(Global.scala:112)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    InitialData$.insert(Global.scala:112)
+    Global$.onStart(Global.scala:9)
+    play.api.GlobalPlugin.onStart(GlobalSettings.scala:175)
+    play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:63)
+    play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:63)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    play.api.Play$$anonfun$start$1.apply$mcV$sp(Play.scala:63)
+    play.api.Play$$anonfun$start$1.apply(Play.scala:63)
+    play.api.Play$$anonfun$start$1.apply(Play.scala:63)
+    play.utils.Threads$.withContextClassLoader(Threads.scala:18)
+    play.api.Play$.start(Play.scala:62)
+    ...
+
+
+2013-06-12 14:53:39,447 - [DEBUG] - from scalikejdbc.StatementExecutor$$anon$1 in New I/O  worker #1 
+SQL execution completed
+
+  [SQL Execution]
+   select next value for task_seq as v from dual; (0 ms)
+
+  [Stack Trace]
+    ...
+    models.Task$.create(Task.scala:94)
+    InitialData$$anonfun$insert$2.apply(Global.scala:112)
+    InitialData$$anonfun$insert$2.apply(Global.scala:112)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    InitialData$.insert(Global.scala:112)
+    Global$.onStart(Global.scala:9)
+    play.api.GlobalPlugin.onStart(GlobalSettings.scala:175)
+    play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:63)
+    play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:63)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    play.api.Play$$anonfun$start$1.apply$mcV$sp(Play.scala:63)
+    play.api.Play$$anonfun$start$1.apply(Play.scala:63)
+    play.api.Play$$anonfun$start$1.apply(Play.scala:63)
+    play.utils.Threads$.withContextClassLoader(Threads.scala:18)
+    play.api.Play$.start(Play.scala:62)
+    ...
+
+
+2013-06-12 14:53:39,450 - [DEBUG] - from scalikejdbc.StatementExecutor$$anon$1 in New I/O  worker #1 
+SQL execution completed
+
+  [SQL Execution]
+   insert into task values (1002 , 'Buy some milk' , false , null , null , 1008 , 'Todo'); (0 ms)
+
+  [Stack Trace]
+    ...
+    models.Task$.create(Task.scala:95)
+    InitialData$$anonfun$insert$2.apply(Global.scala:112)
+    InitialData$$anonfun$insert$2.apply(Global.scala:112)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    InitialData$.insert(Global.scala:112)
+    Global$.onStart(Global.scala:9)
+    play.api.GlobalPlugin.onStart(GlobalSettings.scala:175)
+    play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:63)
+    play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:63)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    play.api.Play$$anonfun$start$1.apply$mcV$sp(Play.scala:63)
+    play.api.Play$$anonfun$start$1.apply(Play.scala:63)
+    play.api.Play$$anonfun$start$1.apply(Play.scala:63)
+    play.utils.Threads$.withContextClassLoader(Threads.scala:18)
+    play.api.Play$.start(Play.scala:62)
+    ...
+
+
+2013-06-12 14:53:39,451 - [DEBUG] - from scalikejdbc.StatementExecutor$$anon$1 in New I/O  worker #1 
+SQL execution completed
+
+  [SQL Execution]
+   select next value for task_seq as v from dual; (0 ms)
+
+  [Stack Trace]
+    ...
+    models.Task$.create(Task.scala:94)
+    InitialData$$anonfun$insert$2.apply(Global.scala:112)
+    InitialData$$anonfun$insert$2.apply(Global.scala:112)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    InitialData$.insert(Global.scala:112)
+    Global$.onStart(Global.scala:9)
+    play.api.GlobalPlugin.onStart(GlobalSettings.scala:175)
+    play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:63)
+    play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:63)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    play.api.Play$$anonfun$start$1.apply$mcV$sp(Play.scala:63)
+    play.api.Play$$anonfun$start$1.apply(Play.scala:63)
+    play.api.Play$$anonfun$start$1.apply(Play.scala:63)
+    play.utils.Threads$.withContextClassLoader(Threads.scala:18)
+    play.api.Play$.start(Play.scala:62)
+    ...
+
+
+2013-06-12 14:53:39,453 - [DEBUG] - from scalikejdbc.StatementExecutor$$anon$1 in New I/O  worker #1 
+SQL execution completed
+
+  [SQL Execution]
+   insert into task values (1003 , 'Check 1.2.4-RC2' , false , '2011-11-18 00:00:00.0' , 'guillaume@sample.com' , 1001 , 'Todo'); (0 ms)
+
+  [Stack Trace]
+    ...
+    models.Task$.create(Task.scala:95)
+    InitialData$$anonfun$insert$2.apply(Global.scala:112)
+    InitialData$$anonfun$insert$2.apply(Global.scala:112)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    InitialData$.insert(Global.scala:112)
+    Global$.onStart(Global.scala:9)
+    play.api.GlobalPlugin.onStart(GlobalSettings.scala:175)
+    play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:63)
+    play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:63)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    play.api.Play$$anonfun$start$1.apply$mcV$sp(Play.scala:63)
+    play.api.Play$$anonfun$start$1.apply(Play.scala:63)
+    play.api.Play$$anonfun$start$1.apply(Play.scala:63)
+    play.utils.Threads$.withContextClassLoader(Threads.scala:18)
+    play.api.Play$.start(Play.scala:62)
+    ...
+
+
+2013-06-12 14:53:39,455 - [DEBUG] - from scalikejdbc.StatementExecutor$$anon$1 in New I/O  worker #1 
+SQL execution completed
+
+  [SQL Execution]
+   select next value for task_seq as v from dual; (0 ms)
+
+  [Stack Trace]
+    ...
+    models.Task$.create(Task.scala:94)
+    InitialData$$anonfun$insert$2.apply(Global.scala:112)
+    InitialData$$anonfun$insert$2.apply(Global.scala:112)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    InitialData$.insert(Global.scala:112)
+    Global$.onStart(Global.scala:9)
+    play.api.GlobalPlugin.onStart(GlobalSettings.scala:175)
+    play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:63)
+    play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:63)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    play.api.Play$$anonfun$start$1.apply$mcV$sp(Play.scala:63)
+    play.api.Play$$anonfun$start$1.apply(Play.scala:63)
+    play.api.Play$$anonfun$start$1.apply(Play.scala:63)
+    play.utils.Threads$.withContextClassLoader(Threads.scala:18)
+    play.api.Play$.start(Play.scala:62)
+    ...
+
+
+2013-06-12 14:53:39,457 - [DEBUG] - from scalikejdbc.StatementExecutor$$anon$1 in New I/O  worker #1 
+SQL execution completed
+
+  [SQL Execution]
+   insert into task values (1004 , 'Finish zentask integration' , true , '2011-11-15 00:00:00.0' , 'maxime@sample.com' , 1006 , 'Todo'); (1 ms)
+
+  [Stack Trace]
+    ...
+    models.Task$.create(Task.scala:95)
+    InitialData$$anonfun$insert$2.apply(Global.scala:112)
+    InitialData$$anonfun$insert$2.apply(Global.scala:112)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    InitialData$.insert(Global.scala:112)
+    Global$.onStart(Global.scala:9)
+    play.api.GlobalPlugin.onStart(GlobalSettings.scala:175)
+    play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:63)
+    play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:63)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    play.api.Play$$anonfun$start$1.apply$mcV$sp(Play.scala:63)
+    play.api.Play$$anonfun$start$1.apply(Play.scala:63)
+    play.api.Play$$anonfun$start$1.apply(Play.scala:63)
+    play.utils.Threads$.withContextClassLoader(Threads.scala:18)
+    play.api.Play$.start(Play.scala:62)
+    ...
+
+
+2013-06-12 14:53:39,459 - [DEBUG] - from scalikejdbc.StatementExecutor$$anon$1 in New I/O  worker #1 
+SQL execution completed
+
+  [SQL Execution]
+   select next value for task_seq as v from dual; (0 ms)
+
+  [Stack Trace]
+    ...
+    models.Task$.create(Task.scala:94)
+    InitialData$$anonfun$insert$2.apply(Global.scala:112)
+    InitialData$$anonfun$insert$2.apply(Global.scala:112)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    InitialData$.insert(Global.scala:112)
+    Global$.onStart(Global.scala:9)
+    play.api.GlobalPlugin.onStart(GlobalSettings.scala:175)
+    play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:63)
+    play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:63)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    play.api.Play$$anonfun$start$1.apply$mcV$sp(Play.scala:63)
+    play.api.Play$$anonfun$start$1.apply(Play.scala:63)
+    play.api.Play$$anonfun$start$1.apply(Play.scala:63)
+    play.utils.Threads$.withContextClassLoader(Threads.scala:18)
+    play.api.Play$.start(Play.scala:62)
+    ...
+
+
+2013-06-12 14:53:39,463 - [DEBUG] - from scalikejdbc.StatementExecutor$$anon$1 in New I/O  worker #1 
+SQL execution completed
+
+  [SQL Execution]
+   insert into task values (1005 , 'Release the secret project' , false , '2012-01-01 00:00:00.0' , 'sadek@sample.com' , 1003 , 'Todo'); (0 ms)
+
+  [Stack Trace]
+    ...
+    models.Task$.create(Task.scala:95)
+    InitialData$$anonfun$insert$2.apply(Global.scala:112)
+    InitialData$$anonfun$insert$2.apply(Global.scala:112)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    InitialData$.insert(Global.scala:112)
+    Global$.onStart(Global.scala:9)
+    play.api.GlobalPlugin.onStart(GlobalSettings.scala:175)
+    play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:63)
+    play.api.Play$$anonfun$start$1$$anonfun$apply$mcV$sp$1.apply(Play.scala:63)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    play.api.Play$$anonfun$start$1.apply$mcV$sp(Play.scala:63)
+    play.api.Play$$anonfun$start$1.apply(Play.scala:63)
+    play.api.Play$$anonfun$start$1.apply(Play.scala:63)
+    play.utils.Threads$.withContextClassLoader(Threads.scala:18)
+    play.api.Play$.start(Play.scala:62)
+    ...
+
+
+2013-06-12 14:53:39,467 - [INFO] - from play in New I/O  worker #1 
+Application started (Dev)
+
+2013-06-12 14:53:39,668 - [INFO] - from akka.event.slf4j.Slf4jEventHandler in play-akka.actor.default-dispatcher-3 
+Slf4jEventHandler started
+
+2013-06-12 14:53:39,844 - [DEBUG] - from scalikejdbc.StatementExecutor$$anon$1 in play-akka.actor.default-dispatcher-3 
+SQL execution completed
+
+  [SQL Execution]
+   select u.email as e_on_u, u.name as n_on_u, u.password as p_on_u from users u where u.email = 'guillaume@sample.com'; (0 ms)
+
+  [Stack Trace]
+    ...
+    models.User$.findByEmail(User.scala:24)
+    controllers.Projects$$anonfun$index$1$$anonfun$apply$1$$anonfun$apply$2.apply(Projects.scala:20)
+    controllers.Projects$$anonfun$index$1$$anonfun$apply$1$$anonfun$apply$2.apply(Projects.scala:19)
+    controllers.Secured$$anonfun$IsAuthenticated$3$$anonfun$apply$3.apply(Application.scala:88)
+    controllers.Secured$$anonfun$IsAuthenticated$3$$anonfun$apply$3.apply(Application.scala:88)
+    play.api.mvc.ActionBuilder$$anon$1.apply(Action.scala:217)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5$$anonfun$apply$6.apply(Action.scala:109)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5$$anonfun$apply$6.apply(Action.scala:109)
+    play.utils.Threads$.withContextClassLoader(Threads.scala:18)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5.apply(Action.scala:108)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5.apply(Action.scala:106)
+    scala.Option.map(Option.scala:145)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2.apply(Action.scala:106)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2.apply(Action.scala:99)
+    scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24)
+    ...
+
+
+2013-06-12 14:53:39,854 - [DEBUG] - from scalikejdbc.StatementExecutor$$anon$1 in play-akka.actor.default-dispatcher-3 
+SQL execution completed
+
+  [SQL Execution]
+   select p.id as i_on_p, p.name as n_on_p, p.folder as f_on_p , m.project_id as pi_on_m, m.user_email as ue_on_m from project p inner join project_member m on p.id = m.project_id where m.user_email = 'guillaume@sample.com'; (0 ms)
+
+  [Stack Trace]
+    ...
+    models.Project$.findInvolving(Project.scala:48)
+    controllers.Projects$$anonfun$index$1$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$3.apply(Projects.scala:23)
+    controllers.Projects$$anonfun$index$1$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$3.apply(Projects.scala:20)
+    scala.Option.map(Option.scala:145)
+    controllers.Projects$$anonfun$index$1$$anonfun$apply$1$$anonfun$apply$2.apply(Projects.scala:20)
+    controllers.Projects$$anonfun$index$1$$anonfun$apply$1$$anonfun$apply$2.apply(Projects.scala:19)
+    controllers.Secured$$anonfun$IsAuthenticated$3$$anonfun$apply$3.apply(Application.scala:88)
+    controllers.Secured$$anonfun$IsAuthenticated$3$$anonfun$apply$3.apply(Application.scala:88)
+    play.api.mvc.ActionBuilder$$anon$1.apply(Action.scala:217)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5$$anonfun$apply$6.apply(Action.scala:109)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5$$anonfun$apply$6.apply(Action.scala:109)
+    play.utils.Threads$.withContextClassLoader(Threads.scala:18)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5.apply(Action.scala:108)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5.apply(Action.scala:106)
+    scala.Option.map(Option.scala:145)
+    ...
+
+
+2013-06-12 14:53:39,868 - [DEBUG] - from scalikejdbc.StatementExecutor$$anon$1 in play-akka.actor.default-dispatcher-3 
+SQL execution completed
+
+  [SQL Execution]
+   select t.id as i_on_t, t.title as t_on_t, t.done as d_on_t, t.due_date as dd_on_t, t.assigned_to as at_on_t, t.project as p_on_t, t.folder as f_on_t , m.project_id as pi_on_m, m.user_email as ue_on_m , p.id as i_on_p, p.name as n_on_p, p.folder as f_on_p from task t inner join project_member m on m.project_id = t.project inner join project p on p.id = m.project_id where t.done = false and m.user_email = 'guillaume@sample.com'; (0 ms)
+
+  [Stack Trace]
+    ...
+    models.Task$.findTodoInvolving(Task.scala:60)
+    controllers.Projects$$anonfun$index$1$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$3.apply(Projects.scala:24)
+    controllers.Projects$$anonfun$index$1$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$3.apply(Projects.scala:20)
+    scala.Option.map(Option.scala:145)
+    controllers.Projects$$anonfun$index$1$$anonfun$apply$1$$anonfun$apply$2.apply(Projects.scala:20)
+    controllers.Projects$$anonfun$index$1$$anonfun$apply$1$$anonfun$apply$2.apply(Projects.scala:19)
+    controllers.Secured$$anonfun$IsAuthenticated$3$$anonfun$apply$3.apply(Application.scala:88)
+    controllers.Secured$$anonfun$IsAuthenticated$3$$anonfun$apply$3.apply(Application.scala:88)
+    play.api.mvc.ActionBuilder$$anon$1.apply(Action.scala:217)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5$$anonfun$apply$6.apply(Action.scala:109)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5$$anonfun$apply$6.apply(Action.scala:109)
+    play.utils.Threads$.withContextClassLoader(Threads.scala:18)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5.apply(Action.scala:108)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5.apply(Action.scala:106)
+    scala.Option.map(Option.scala:145)
+    ...
+
+
+2013-06-12 14:53:52,585 - [DEBUG] - from scalikejdbc.StatementExecutor$$anon$1 in play-akka.actor.default-dispatcher-9 
+SQL execution completed
+
+  [SQL Execution]
+   update project p set p.folder = 'sdfsf' where p.folder = 'New group'; (1 ms)
+
+  [Stack Trace]
+    ...
+    models.Project$.renameFolder(Project.scala:62)
+    controllers.Projects$$anonfun$renameGroup$1$$anonfun$apply$19$$anonfun$apply$20$$anonfun$apply$22.apply(Projects.scala:94)
+    controllers.Projects$$anonfun$renameGroup$1$$anonfun$apply$19$$anonfun$apply$20$$anonfun$apply$22.apply(Projects.scala:94)
+    play.api.data.Form$$anonfun$fold$1.apply(Form.scala:134)
+    scala.Option.map(Option.scala:145)
+    play.api.data.Form.fold(Form.scala:134)
+    controllers.Projects$$anonfun$renameGroup$1$$anonfun$apply$19$$anonfun$apply$20.apply(Projects.scala:92)
+    controllers.Projects$$anonfun$renameGroup$1$$anonfun$apply$19$$anonfun$apply$20.apply(Projects.scala:91)
+    controllers.Secured$$anonfun$IsAuthenticated$3$$anonfun$apply$3.apply(Application.scala:88)
+    controllers.Secured$$anonfun$IsAuthenticated$3$$anonfun$apply$3.apply(Application.scala:88)
+    play.api.mvc.ActionBuilder$$anon$1.apply(Action.scala:217)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5$$anonfun$apply$6.apply(Action.scala:109)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5$$anonfun$apply$6.apply(Action.scala:109)
+    play.utils.Threads$.withContextClassLoader(Threads.scala:18)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5.apply(Action.scala:108)
+    ...
+
+
+2013-06-12 14:53:54,471 - [DEBUG] - from scalikejdbc.StatementExecutor$$anon$1 in play-akka.actor.default-dispatcher-9 
+SQL execution completed
+
+  [SQL Execution]
+   select next value for project_seq as v from dual; (0 ms)
+
+  [Stack Trace]
+    ...
+    models.Project$.create(Project.scala:90)
+    controllers.Projects$$anonfun$add$1$$anonfun$apply$5$$anonfun$apply$6$$anonfun$apply$8.apply(Projects.scala:41)
+    controllers.Projects$$anonfun$add$1$$anonfun$apply$5$$anonfun$apply$6$$anonfun$apply$8.apply(Projects.scala:39)
+    play.api.data.Form$$anonfun$fold$1.apply(Form.scala:134)
+    scala.Option.map(Option.scala:145)
+    play.api.data.Form.fold(Form.scala:134)
+    controllers.Projects$$anonfun$add$1$$anonfun$apply$5$$anonfun$apply$6.apply(Projects.scala:37)
+    controllers.Projects$$anonfun$add$1$$anonfun$apply$5$$anonfun$apply$6.apply(Projects.scala:36)
+    controllers.Secured$$anonfun$IsAuthenticated$3$$anonfun$apply$3.apply(Application.scala:88)
+    controllers.Secured$$anonfun$IsAuthenticated$3$$anonfun$apply$3.apply(Application.scala:88)
+    play.api.mvc.ActionBuilder$$anon$1.apply(Action.scala:217)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5$$anonfun$apply$6.apply(Action.scala:109)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5$$anonfun$apply$6.apply(Action.scala:109)
+    play.utils.Threads$.withContextClassLoader(Threads.scala:18)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5.apply(Action.scala:108)
+    ...
+
+
+2013-06-12 14:53:54,474 - [DEBUG] - from scalikejdbc.StatementExecutor$$anon$1 in play-akka.actor.default-dispatcher-9 
+SQL execution completed
+
+  [SQL Execution]
+   insert into project values (1011 , 'New project' , 'sdfsf'); (0 ms)
+
+  [Stack Trace]
+    ...
+    models.Project$.create(Project.scala:91)
+    controllers.Projects$$anonfun$add$1$$anonfun$apply$5$$anonfun$apply$6$$anonfun$apply$8.apply(Projects.scala:41)
+    controllers.Projects$$anonfun$add$1$$anonfun$apply$5$$anonfun$apply$6$$anonfun$apply$8.apply(Projects.scala:39)
+    play.api.data.Form$$anonfun$fold$1.apply(Form.scala:134)
+    scala.Option.map(Option.scala:145)
+    play.api.data.Form.fold(Form.scala:134)
+    controllers.Projects$$anonfun$add$1$$anonfun$apply$5$$anonfun$apply$6.apply(Projects.scala:37)
+    controllers.Projects$$anonfun$add$1$$anonfun$apply$5$$anonfun$apply$6.apply(Projects.scala:36)
+    controllers.Secured$$anonfun$IsAuthenticated$3$$anonfun$apply$3.apply(Application.scala:88)
+    controllers.Secured$$anonfun$IsAuthenticated$3$$anonfun$apply$3.apply(Application.scala:88)
+    play.api.mvc.ActionBuilder$$anon$1.apply(Action.scala:217)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5$$anonfun$apply$6.apply(Action.scala:109)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5$$anonfun$apply$6.apply(Action.scala:109)
+    play.utils.Threads$.withContextClassLoader(Threads.scala:18)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5.apply(Action.scala:108)
+    ...
+
+
+2013-06-12 14:53:54,476 - [DEBUG] - from scalikejdbc.StatementExecutor$$anon$1 in play-akka.actor.default-dispatcher-9 
+SQL execution completed
+
+  [SQL Execution]
+   insert into project_member values (1011 , 'guillaume@sample.com'); (0 ms)
+
+  [Stack Trace]
+    ...
+    models.Project$$anonfun$create$1.apply(Project.scala:93)
+    models.Project$$anonfun$create$1.apply(Project.scala:93)
+    scala.collection.immutable.List.foreach(List.scala:309)
+    models.Project$.create(Project.scala:93)
+    controllers.Projects$$anonfun$add$1$$anonfun$apply$5$$anonfun$apply$6$$anonfun$apply$8.apply(Projects.scala:41)
+    controllers.Projects$$anonfun$add$1$$anonfun$apply$5$$anonfun$apply$6$$anonfun$apply$8.apply(Projects.scala:39)
+    play.api.data.Form$$anonfun$fold$1.apply(Form.scala:134)
+    scala.Option.map(Option.scala:145)
+    play.api.data.Form.fold(Form.scala:134)
+    controllers.Projects$$anonfun$add$1$$anonfun$apply$5$$anonfun$apply$6.apply(Projects.scala:37)
+    controllers.Projects$$anonfun$add$1$$anonfun$apply$5$$anonfun$apply$6.apply(Projects.scala:36)
+    controllers.Secured$$anonfun$IsAuthenticated$3$$anonfun$apply$3.apply(Application.scala:88)
+    controllers.Secured$$anonfun$IsAuthenticated$3$$anonfun$apply$3.apply(Application.scala:88)
+    play.api.mvc.ActionBuilder$$anon$1.apply(Action.scala:217)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5$$anonfun$apply$6.apply(Action.scala:109)
+    ...
+
+
+2013-06-12 14:53:55,408 - [DEBUG] - from scalikejdbc.StatementExecutor$$anon$1 in play-akka.actor.default-dispatcher-9 
+SQL execution completed
+
+  [SQL Execution]
+   select count(u.email) = 1 as is_member from users u inner join project_member m on m.user_email = u.email where m.project_id = 1011 and u.email = 'guillaume@sample.com'; (2 ms)
+
+  [Stack Trace]
+    ...
+    models.Project$.isMember(Project.scala:86)
+    controllers.Secured$$anonfun$IsMemberOf$1$$anonfun$apply$4$$anonfun$apply$5.apply(Application.scala:95)
+    controllers.Secured$$anonfun$IsMemberOf$1$$anonfun$apply$4$$anonfun$apply$5.apply(Application.scala:94)
+    controllers.Secured$$anonfun$IsAuthenticated$3$$anonfun$apply$3.apply(Application.scala:88)
+    controllers.Secured$$anonfun$IsAuthenticated$3$$anonfun$apply$3.apply(Application.scala:88)
+    play.api.mvc.ActionBuilder$$anon$1.apply(Action.scala:217)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5$$anonfun$apply$6.apply(Action.scala:109)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5$$anonfun$apply$6.apply(Action.scala:109)
+    play.utils.Threads$.withContextClassLoader(Threads.scala:18)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5.apply(Action.scala:108)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5.apply(Action.scala:106)
+    scala.Option.map(Option.scala:145)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2.apply(Action.scala:106)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2.apply(Action.scala:99)
+    scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24)
+    ...
+
+
+2013-06-12 14:53:55,413 - [DEBUG] - from scalikejdbc.StatementExecutor$$anon$1 in play-akka.actor.default-dispatcher-9 
+SQL execution completed
+
+  [SQL Execution]
+   update project p set p.name = 'sdfsfs' where p.id = 1011; (0 ms)
+
+  [Stack Trace]
+    ...
+    models.Project$.rename(Project.scala:50)
+    controllers.Projects$$anonfun$rename$1$$anonfun$apply$11$$anonfun$apply$12$$anonfun$apply$14.apply(Projects.scala:65)
+    controllers.Projects$$anonfun$rename$1$$anonfun$apply$11$$anonfun$apply$12$$anonfun$apply$14.apply(Projects.scala:64)
+    play.api.data.Form$$anonfun$fold$1.apply(Form.scala:134)
+    scala.Option.map(Option.scala:145)
+    play.api.data.Form.fold(Form.scala:134)
+    controllers.Projects$$anonfun$rename$1$$anonfun$apply$11$$anonfun$apply$12.apply(Projects.scala:62)
+    controllers.Projects$$anonfun$rename$1$$anonfun$apply$11$$anonfun$apply$12.apply(Projects.scala:61)
+    controllers.Secured$$anonfun$IsMemberOf$1$$anonfun$apply$4$$anonfun$apply$5.apply(Application.scala:96)
+    controllers.Secured$$anonfun$IsMemberOf$1$$anonfun$apply$4$$anonfun$apply$5.apply(Application.scala:94)
+    controllers.Secured$$anonfun$IsAuthenticated$3$$anonfun$apply$3.apply(Application.scala:88)
+    controllers.Secured$$anonfun$IsAuthenticated$3$$anonfun$apply$3.apply(Application.scala:88)
+    play.api.mvc.ActionBuilder$$anon$1.apply(Action.scala:217)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5$$anonfun$apply$6.apply(Action.scala:109)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5$$anonfun$apply$6.apply(Action.scala:109)
+    ...
+
+
+2013-06-12 14:53:56,503 - [DEBUG] - from scalikejdbc.StatementExecutor$$anon$1 in play-akka.actor.default-dispatcher-9 
+SQL execution completed
+
+  [SQL Execution]
+   select count(u.email) = 1 as is_member from users u inner join project_member m on m.user_email = u.email where m.project_id = 1011 and u.email = 'guillaume@sample.com'; (0 ms)
+
+  [Stack Trace]
+    ...
+    models.Project$.isMember(Project.scala:86)
+    controllers.Secured$$anonfun$IsMemberOf$1$$anonfun$apply$4$$anonfun$apply$5.apply(Application.scala:95)
+    controllers.Secured$$anonfun$IsMemberOf$1$$anonfun$apply$4$$anonfun$apply$5.apply(Application.scala:94)
+    controllers.Secured$$anonfun$IsAuthenticated$3$$anonfun$apply$3.apply(Application.scala:88)
+    controllers.Secured$$anonfun$IsAuthenticated$3$$anonfun$apply$3.apply(Application.scala:88)
+    play.api.mvc.ActionBuilder$$anon$1.apply(Action.scala:217)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5$$anonfun$apply$6.apply(Action.scala:109)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5$$anonfun$apply$6.apply(Action.scala:109)
+    play.utils.Threads$.withContextClassLoader(Threads.scala:18)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5.apply(Action.scala:108)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5.apply(Action.scala:106)
+    scala.Option.map(Option.scala:145)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2.apply(Action.scala:106)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2.apply(Action.scala:99)
+    scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24)
+    ...
+
+
+2013-06-12 14:53:56,506 - [DEBUG] - from scalikejdbc.StatementExecutor$$anon$1 in play-akka.actor.default-dispatcher-9 
+SQL execution completed
+
+  [SQL Execution]
+   select p.id as i_on_p, p.name as n_on_p, p.folder as f_on_p from project p where p.id = 1011; (1 ms)
+
+  [Stack Trace]
+    ...
+    models.Project$.findById(Project.scala:41)
+    controllers.Tasks$$anonfun$index$1$$anonfun$apply$1$$anonfun$apply$2.apply(Tasks.scala:21)
+    controllers.Tasks$$anonfun$index$1$$anonfun$apply$1$$anonfun$apply$2.apply(Tasks.scala:20)
+    controllers.Secured$$anonfun$IsMemberOf$1$$anonfun$apply$4$$anonfun$apply$5.apply(Application.scala:96)
+    controllers.Secured$$anonfun$IsMemberOf$1$$anonfun$apply$4$$anonfun$apply$5.apply(Application.scala:94)
+    controllers.Secured$$anonfun$IsAuthenticated$3$$anonfun$apply$3.apply(Application.scala:88)
+    controllers.Secured$$anonfun$IsAuthenticated$3$$anonfun$apply$3.apply(Application.scala:88)
+    play.api.mvc.ActionBuilder$$anon$1.apply(Action.scala:217)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5$$anonfun$apply$6.apply(Action.scala:109)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5$$anonfun$apply$6.apply(Action.scala:109)
+    play.utils.Threads$.withContextClassLoader(Threads.scala:18)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5.apply(Action.scala:108)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5.apply(Action.scala:106)
+    scala.Option.map(Option.scala:145)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2.apply(Action.scala:106)
+    ...
+
+
+2013-06-12 14:53:56,510 - [DEBUG] - from scalikejdbc.StatementExecutor$$anon$1 in play-akka.actor.default-dispatcher-9 
+SQL execution completed
+
+  [SQL Execution]
+   select t.id as i_on_t, t.title as t_on_t, t.done as d_on_t, t.due_date as dd_on_t, t.assigned_to as at_on_t, t.project as p_on_t, t.folder as f_on_t from task t where t.project = 1011; (0 ms)
+
+  [Stack Trace]
+    ...
+    models.Task$.findByProject(Task.scala:64)
+    controllers.Tasks$$anonfun$index$1$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$3.apply(Tasks.scala:22)
+    controllers.Tasks$$anonfun$index$1$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$3.apply(Tasks.scala:21)
+    scala.Option.map(Option.scala:145)
+    controllers.Tasks$$anonfun$index$1$$anonfun$apply$1$$anonfun$apply$2.apply(Tasks.scala:21)
+    controllers.Tasks$$anonfun$index$1$$anonfun$apply$1$$anonfun$apply$2.apply(Tasks.scala:20)
+    controllers.Secured$$anonfun$IsMemberOf$1$$anonfun$apply$4$$anonfun$apply$5.apply(Application.scala:96)
+    controllers.Secured$$anonfun$IsMemberOf$1$$anonfun$apply$4$$anonfun$apply$5.apply(Application.scala:94)
+    controllers.Secured$$anonfun$IsAuthenticated$3$$anonfun$apply$3.apply(Application.scala:88)
+    controllers.Secured$$anonfun$IsAuthenticated$3$$anonfun$apply$3.apply(Application.scala:88)
+    play.api.mvc.ActionBuilder$$anon$1.apply(Action.scala:217)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5$$anonfun$apply$6.apply(Action.scala:109)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5$$anonfun$apply$6.apply(Action.scala:109)
+    play.utils.Threads$.withContextClassLoader(Threads.scala:18)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5.apply(Action.scala:108)
+    ...
+
+
+2013-06-12 14:53:56,513 - [DEBUG] - from scalikejdbc.StatementExecutor$$anon$1 in play-akka.actor.default-dispatcher-9 
+SQL execution completed
+
+  [SQL Execution]
+   select u.email as e_on_u, u.name as n_on_u, u.password as p_on_u , m.project_id as pi_on_m, m.user_email as ue_on_m from users u inner join project_member m on m.user_email = u.email where m.project_id = 1011; (0 ms)
+
+  [Stack Trace]
+    ...
+    models.Project$.membersOf(Project.scala:71)
+    controllers.Tasks$$anonfun$index$1$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$3.apply(Tasks.scala:23)
+    controllers.Tasks$$anonfun$index$1$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$3.apply(Tasks.scala:21)
+    scala.Option.map(Option.scala:145)
+    controllers.Tasks$$anonfun$index$1$$anonfun$apply$1$$anonfun$apply$2.apply(Tasks.scala:21)
+    controllers.Tasks$$anonfun$index$1$$anonfun$apply$1$$anonfun$apply$2.apply(Tasks.scala:20)
+    controllers.Secured$$anonfun$IsMemberOf$1$$anonfun$apply$4$$anonfun$apply$5.apply(Application.scala:96)
+    controllers.Secured$$anonfun$IsMemberOf$1$$anonfun$apply$4$$anonfun$apply$5.apply(Application.scala:94)
+    controllers.Secured$$anonfun$IsAuthenticated$3$$anonfun$apply$3.apply(Application.scala:88)
+    controllers.Secured$$anonfun$IsAuthenticated$3$$anonfun$apply$3.apply(Application.scala:88)
+    play.api.mvc.ActionBuilder$$anon$1.apply(Action.scala:217)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5$$anonfun$apply$6.apply(Action.scala:109)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5$$anonfun$apply$6.apply(Action.scala:109)
+    play.utils.Threads$.withContextClassLoader(Threads.scala:18)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5.apply(Action.scala:108)
+    ...
+
+
+2013-06-12 14:53:56,517 - [DEBUG] - from scalikejdbc.StatementExecutor$$anon$1 in play-akka.actor.default-dispatcher-9 
+SQL execution completed
+
+  [SQL Execution]
+   select u.email as e_on_u, u.name as n_on_u, u.password as p_on_u from users u; (1 ms)
+
+  [Stack Trace]
+    ...
+    models.User$.findAll(User.scala:28)
+    views.html.tasks.index$.apply(index.template.scala:44)
+    controllers.Tasks$$anonfun$index$1$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$3.apply(Tasks.scala:24)
+    controllers.Tasks$$anonfun$index$1$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$3.apply(Tasks.scala:21)
+    scala.Option.map(Option.scala:145)
+    controllers.Tasks$$anonfun$index$1$$anonfun$apply$1$$anonfun$apply$2.apply(Tasks.scala:21)
+    controllers.Tasks$$anonfun$index$1$$anonfun$apply$1$$anonfun$apply$2.apply(Tasks.scala:20)
+    controllers.Secured$$anonfun$IsMemberOf$1$$anonfun$apply$4$$anonfun$apply$5.apply(Application.scala:96)
+    controllers.Secured$$anonfun$IsMemberOf$1$$anonfun$apply$4$$anonfun$apply$5.apply(Application.scala:94)
+    controllers.Secured$$anonfun$IsAuthenticated$3$$anonfun$apply$3.apply(Application.scala:88)
+    controllers.Secured$$anonfun$IsAuthenticated$3$$anonfun$apply$3.apply(Application.scala:88)
+    play.api.mvc.ActionBuilder$$anon$1.apply(Action.scala:217)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5$$anonfun$apply$6.apply(Action.scala:109)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5$$anonfun$apply$6.apply(Action.scala:109)
+    play.utils.Threads$.withContextClassLoader(Threads.scala:18)
+    ...
+
+
+2013-06-12 14:53:58,499 - [DEBUG] - from scalikejdbc.StatementExecutor$$anon$1 in play-akka.actor.default-dispatcher-9 
+SQL execution completed
+
+  [SQL Execution]
+   select count(u.email) = 1 as is_member from users u inner join project_member m on m.user_email = u.email where m.project_id = 1011 and u.email = 'guillaume@sample.com'; (0 ms)
+
+  [Stack Trace]
+    ...
+    models.Project$.isMember(Project.scala:86)
+    controllers.Secured$$anonfun$IsMemberOf$1$$anonfun$apply$4$$anonfun$apply$5.apply(Application.scala:95)
+    controllers.Secured$$anonfun$IsMemberOf$1$$anonfun$apply$4$$anonfun$apply$5.apply(Application.scala:94)
+    controllers.Secured$$anonfun$IsAuthenticated$3$$anonfun$apply$3.apply(Application.scala:88)
+    controllers.Secured$$anonfun$IsAuthenticated$3$$anonfun$apply$3.apply(Application.scala:88)
+    play.api.mvc.ActionBuilder$$anon$1.apply(Action.scala:217)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5$$anonfun$apply$6.apply(Action.scala:109)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5$$anonfun$apply$6.apply(Action.scala:109)
+    play.utils.Threads$.withContextClassLoader(Threads.scala:18)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5.apply(Action.scala:108)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5.apply(Action.scala:106)
+    scala.Option.map(Option.scala:145)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2.apply(Action.scala:106)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2.apply(Action.scala:99)
+    scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24)
+    ...
+
+
+2013-06-12 14:53:58,503 - [DEBUG] - from scalikejdbc.StatementExecutor$$anon$1 in play-akka.actor.default-dispatcher-9 
+SQL execution completed
+
+  [SQL Execution]
+   update task t set t.folder = 'sdfafsa' where t.folder = 'New folder' and t.project = 1011; (0 ms)
+
+  [Stack Trace]
+    ...
+    models.Task$.renameFolder(Task.scala:81)
+    controllers.Tasks$$anonfun$renameFolder$1$$anonfun$apply$17$$anonfun$apply$18$$anonfun$apply$20.apply(Tasks.scala:99)
+    controllers.Tasks$$anonfun$renameFolder$1$$anonfun$apply$17$$anonfun$apply$18$$anonfun$apply$20.apply(Tasks.scala:98)
+    play.api.data.Form$$anonfun$fold$1.apply(Form.scala:134)
+    scala.Option.map(Option.scala:145)
+    play.api.data.Form.fold(Form.scala:134)
+    controllers.Tasks$$anonfun$renameFolder$1$$anonfun$apply$17$$anonfun$apply$18.apply(Tasks.scala:96)
+    controllers.Tasks$$anonfun$renameFolder$1$$anonfun$apply$17$$anonfun$apply$18.apply(Tasks.scala:95)
+    controllers.Secured$$anonfun$IsMemberOf$1$$anonfun$apply$4$$anonfun$apply$5.apply(Application.scala:96)
+    controllers.Secured$$anonfun$IsMemberOf$1$$anonfun$apply$4$$anonfun$apply$5.apply(Application.scala:94)
+    controllers.Secured$$anonfun$IsAuthenticated$3$$anonfun$apply$3.apply(Application.scala:88)
+    controllers.Secured$$anonfun$IsAuthenticated$3$$anonfun$apply$3.apply(Application.scala:88)
+    play.api.mvc.ActionBuilder$$anon$1.apply(Action.scala:217)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5$$anonfun$apply$6.apply(Action.scala:109)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5$$anonfun$apply$6.apply(Action.scala:109)
+    ...
+
+
+2013-06-12 14:53:59,969 - [DEBUG] - from scalikejdbc.StatementExecutor$$anon$1 in play-akka.actor.default-dispatcher-9 
+SQL execution completed
+
+  [SQL Execution]
+   select count(u.email) = 1 as is_member from users u inner join project_member m on m.user_email = u.email where m.project_id = 1011 and u.email = 'guillaume@sample.com'; (0 ms)
+
+  [Stack Trace]
+    ...
+    models.Project$.isMember(Project.scala:86)
+    controllers.Secured$$anonfun$IsMemberOf$1$$anonfun$apply$4$$anonfun$apply$5.apply(Application.scala:95)
+    controllers.Secured$$anonfun$IsMemberOf$1$$anonfun$apply$4$$anonfun$apply$5.apply(Application.scala:94)
+    controllers.Secured$$anonfun$IsAuthenticated$3$$anonfun$apply$3.apply(Application.scala:88)
+    controllers.Secured$$anonfun$IsAuthenticated$3$$anonfun$apply$3.apply(Application.scala:88)
+    play.api.mvc.ActionBuilder$$anon$1.apply(Action.scala:217)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5$$anonfun$apply$6.apply(Action.scala:109)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5$$anonfun$apply$6.apply(Action.scala:109)
+    play.utils.Threads$.withContextClassLoader(Threads.scala:18)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5.apply(Action.scala:108)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5.apply(Action.scala:106)
+    scala.Option.map(Option.scala:145)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2.apply(Action.scala:106)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2.apply(Action.scala:99)
+    scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24)
+    ...
+
+
+2013-06-12 14:53:59,979 - [DEBUG] - from scalikejdbc.StatementExecutor$$anon$1 in play-akka.actor.default-dispatcher-9 
+SQL execution completed
+
+  [SQL Execution]
+   select next value for task_seq as v from dual; (1 ms)
+
+  [Stack Trace]
+    ...
+    models.Task$.create(Task.scala:94)
+    controllers.Tasks$$anonfun$add$1$$anonfun$apply$5$$anonfun$apply$6$$anonfun$apply$8.apply(Tasks.scala:46)
+    controllers.Tasks$$anonfun$add$1$$anonfun$apply$5$$anonfun$apply$6$$anonfun$apply$8.apply(Tasks.scala:44)
+    play.api.data.Form$$anonfun$fold$1.apply(Form.scala:134)
+    scala.Option.map(Option.scala:145)
+    play.api.data.Form.fold(Form.scala:134)
+    controllers.Tasks$$anonfun$add$1$$anonfun$apply$5$$anonfun$apply$6.apply(Tasks.scala:42)
+    controllers.Tasks$$anonfun$add$1$$anonfun$apply$5$$anonfun$apply$6.apply(Tasks.scala:41)
+    controllers.Secured$$anonfun$IsMemberOf$1$$anonfun$apply$4$$anonfun$apply$5.apply(Application.scala:96)
+    controllers.Secured$$anonfun$IsMemberOf$1$$anonfun$apply$4$$anonfun$apply$5.apply(Application.scala:94)
+    controllers.Secured$$anonfun$IsAuthenticated$3$$anonfun$apply$3.apply(Application.scala:88)
+    controllers.Secured$$anonfun$IsAuthenticated$3$$anonfun$apply$3.apply(Application.scala:88)
+    play.api.mvc.ActionBuilder$$anon$1.apply(Action.scala:217)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5$$anonfun$apply$6.apply(Action.scala:109)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5$$anonfun$apply$6.apply(Action.scala:109)
+    ...
+
+
+2013-06-12 14:53:59,981 - [DEBUG] - from scalikejdbc.StatementExecutor$$anon$1 in play-akka.actor.default-dispatcher-9 
+SQL execution completed
+
+  [SQL Execution]
+   insert into task values (1006 , 'saaaa' , false , null , null , 1011 , 'sdfafsa'); (0 ms)
+
+  [Stack Trace]
+    ...
+    models.Task$.create(Task.scala:95)
+    controllers.Tasks$$anonfun$add$1$$anonfun$apply$5$$anonfun$apply$6$$anonfun$apply$8.apply(Tasks.scala:46)
+    controllers.Tasks$$anonfun$add$1$$anonfun$apply$5$$anonfun$apply$6$$anonfun$apply$8.apply(Tasks.scala:44)
+    play.api.data.Form$$anonfun$fold$1.apply(Form.scala:134)
+    scala.Option.map(Option.scala:145)
+    play.api.data.Form.fold(Form.scala:134)
+    controllers.Tasks$$anonfun$add$1$$anonfun$apply$5$$anonfun$apply$6.apply(Tasks.scala:42)
+    controllers.Tasks$$anonfun$add$1$$anonfun$apply$5$$anonfun$apply$6.apply(Tasks.scala:41)
+    controllers.Secured$$anonfun$IsMemberOf$1$$anonfun$apply$4$$anonfun$apply$5.apply(Application.scala:96)
+    controllers.Secured$$anonfun$IsMemberOf$1$$anonfun$apply$4$$anonfun$apply$5.apply(Application.scala:94)
+    controllers.Secured$$anonfun$IsAuthenticated$3$$anonfun$apply$3.apply(Application.scala:88)
+    controllers.Secured$$anonfun$IsAuthenticated$3$$anonfun$apply$3.apply(Application.scala:88)
+    play.api.mvc.ActionBuilder$$anon$1.apply(Action.scala:217)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5$$anonfun$apply$6.apply(Action.scala:109)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5$$anonfun$apply$6.apply(Action.scala:109)
+    ...
+
+
+2013-06-12 14:54:00,420 - [DEBUG] - from scalikejdbc.StatementExecutor$$anon$1 in play-akka.actor.default-dispatcher-9 
+SQL execution completed
+
+  [SQL Execution]
+   select u.email as e_on_u, u.name as n_on_u, u.password as p_on_u from users u where u.email = 'guillaume@sample.com'; (0 ms)
+
+  [Stack Trace]
+    ...
+    models.User$.findByEmail(User.scala:24)
+    controllers.Projects$$anonfun$index$1$$anonfun$apply$1$$anonfun$apply$2.apply(Projects.scala:20)
+    controllers.Projects$$anonfun$index$1$$anonfun$apply$1$$anonfun$apply$2.apply(Projects.scala:19)
+    controllers.Secured$$anonfun$IsAuthenticated$3$$anonfun$apply$3.apply(Application.scala:88)
+    controllers.Secured$$anonfun$IsAuthenticated$3$$anonfun$apply$3.apply(Application.scala:88)
+    play.api.mvc.ActionBuilder$$anon$1.apply(Action.scala:217)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5$$anonfun$apply$6.apply(Action.scala:109)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5$$anonfun$apply$6.apply(Action.scala:109)
+    play.utils.Threads$.withContextClassLoader(Threads.scala:18)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5.apply(Action.scala:108)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5.apply(Action.scala:106)
+    scala.Option.map(Option.scala:145)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2.apply(Action.scala:106)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2.apply(Action.scala:99)
+    scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24)
+    ...
+
+
+2013-06-12 14:54:00,424 - [DEBUG] - from scalikejdbc.StatementExecutor$$anon$1 in play-akka.actor.default-dispatcher-9 
+SQL execution completed
+
+  [SQL Execution]
+   select p.id as i_on_p, p.name as n_on_p, p.folder as f_on_p , m.project_id as pi_on_m, m.user_email as ue_on_m from project p inner join project_member m on p.id = m.project_id where m.user_email = 'guillaume@sample.com'; (1 ms)
+
+  [Stack Trace]
+    ...
+    models.Project$.findInvolving(Project.scala:48)
+    controllers.Projects$$anonfun$index$1$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$3.apply(Projects.scala:23)
+    controllers.Projects$$anonfun$index$1$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$3.apply(Projects.scala:20)
+    scala.Option.map(Option.scala:145)
+    controllers.Projects$$anonfun$index$1$$anonfun$apply$1$$anonfun$apply$2.apply(Projects.scala:20)
+    controllers.Projects$$anonfun$index$1$$anonfun$apply$1$$anonfun$apply$2.apply(Projects.scala:19)
+    controllers.Secured$$anonfun$IsAuthenticated$3$$anonfun$apply$3.apply(Application.scala:88)
+    controllers.Secured$$anonfun$IsAuthenticated$3$$anonfun$apply$3.apply(Application.scala:88)
+    play.api.mvc.ActionBuilder$$anon$1.apply(Action.scala:217)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5$$anonfun$apply$6.apply(Action.scala:109)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5$$anonfun$apply$6.apply(Action.scala:109)
+    play.utils.Threads$.withContextClassLoader(Threads.scala:18)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5.apply(Action.scala:108)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5.apply(Action.scala:106)
+    scala.Option.map(Option.scala:145)
+    ...
+
+
+2013-06-12 14:54:00,436 - [DEBUG] - from scalikejdbc.StatementExecutor$$anon$1 in play-akka.actor.default-dispatcher-9 
+SQL execution completed
+
+  [SQL Execution]
+   select t.id as i_on_t, t.title as t_on_t, t.done as d_on_t, t.due_date as dd_on_t, t.assigned_to as at_on_t, t.project as p_on_t, t.folder as f_on_t , m.project_id as pi_on_m, m.user_email as ue_on_m , p.id as i_on_p, p.name as n_on_p, p.folder as f_on_p from task t inner join project_member m on m.project_id = t.project inner join project p on p.id = m.project_id where t.done = false and m.user_email = 'guillaume@sample.com'; (1 ms)
+
+  [Stack Trace]
+    ...
+    models.Task$.findTodoInvolving(Task.scala:60)
+    controllers.Projects$$anonfun$index$1$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$3.apply(Projects.scala:24)
+    controllers.Projects$$anonfun$index$1$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$3.apply(Projects.scala:20)
+    scala.Option.map(Option.scala:145)
+    controllers.Projects$$anonfun$index$1$$anonfun$apply$1$$anonfun$apply$2.apply(Projects.scala:20)
+    controllers.Projects$$anonfun$index$1$$anonfun$apply$1$$anonfun$apply$2.apply(Projects.scala:19)
+    controllers.Secured$$anonfun$IsAuthenticated$3$$anonfun$apply$3.apply(Application.scala:88)
+    controllers.Secured$$anonfun$IsAuthenticated$3$$anonfun$apply$3.apply(Application.scala:88)
+    play.api.mvc.ActionBuilder$$anon$1.apply(Action.scala:217)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5$$anonfun$apply$6.apply(Action.scala:109)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5$$anonfun$apply$6.apply(Action.scala:109)
+    play.utils.Threads$.withContextClassLoader(Threads.scala:18)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5.apply(Action.scala:108)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5.apply(Action.scala:106)
+    scala.Option.map(Option.scala:145)
+    ...
+
+
+2013-06-12 14:54:00,551 - [DEBUG] - from scalikejdbc.StatementExecutor$$anon$1 in play-akka.actor.default-dispatcher-9 
+SQL execution completed
+
+  [SQL Execution]
+   select count(u.email) = 1 as is_member from users u inner join project_member m on m.user_email = u.email where m.project_id = 1011 and u.email = 'guillaume@sample.com'; (0 ms)
+
+  [Stack Trace]
+    ...
+    models.Project$.isMember(Project.scala:86)
+    controllers.Secured$$anonfun$IsMemberOf$1$$anonfun$apply$4$$anonfun$apply$5.apply(Application.scala:95)
+    controllers.Secured$$anonfun$IsMemberOf$1$$anonfun$apply$4$$anonfun$apply$5.apply(Application.scala:94)
+    controllers.Secured$$anonfun$IsAuthenticated$3$$anonfun$apply$3.apply(Application.scala:88)
+    controllers.Secured$$anonfun$IsAuthenticated$3$$anonfun$apply$3.apply(Application.scala:88)
+    play.api.mvc.ActionBuilder$$anon$1.apply(Action.scala:217)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5$$anonfun$apply$6.apply(Action.scala:109)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5$$anonfun$apply$6.apply(Action.scala:109)
+    play.utils.Threads$.withContextClassLoader(Threads.scala:18)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5.apply(Action.scala:108)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5.apply(Action.scala:106)
+    scala.Option.map(Option.scala:145)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2.apply(Action.scala:106)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2.apply(Action.scala:99)
+    scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24)
+    ...
+
+
+2013-06-12 14:54:00,553 - [DEBUG] - from scalikejdbc.StatementExecutor$$anon$1 in play-akka.actor.default-dispatcher-9 
+SQL execution completed
+
+  [SQL Execution]
+   select p.id as i_on_p, p.name as n_on_p, p.folder as f_on_p from project p where p.id = 1011; (0 ms)
+
+  [Stack Trace]
+    ...
+    models.Project$.findById(Project.scala:41)
+    controllers.Tasks$$anonfun$index$1$$anonfun$apply$1$$anonfun$apply$2.apply(Tasks.scala:21)
+    controllers.Tasks$$anonfun$index$1$$anonfun$apply$1$$anonfun$apply$2.apply(Tasks.scala:20)
+    controllers.Secured$$anonfun$IsMemberOf$1$$anonfun$apply$4$$anonfun$apply$5.apply(Application.scala:96)
+    controllers.Secured$$anonfun$IsMemberOf$1$$anonfun$apply$4$$anonfun$apply$5.apply(Application.scala:94)
+    controllers.Secured$$anonfun$IsAuthenticated$3$$anonfun$apply$3.apply(Application.scala:88)
+    controllers.Secured$$anonfun$IsAuthenticated$3$$anonfun$apply$3.apply(Application.scala:88)
+    play.api.mvc.ActionBuilder$$anon$1.apply(Action.scala:217)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5$$anonfun$apply$6.apply(Action.scala:109)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5$$anonfun$apply$6.apply(Action.scala:109)
+    play.utils.Threads$.withContextClassLoader(Threads.scala:18)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5.apply(Action.scala:108)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5.apply(Action.scala:106)
+    scala.Option.map(Option.scala:145)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2.apply(Action.scala:106)
+    ...
+
+
+2013-06-12 14:54:00,557 - [DEBUG] - from scalikejdbc.StatementExecutor$$anon$1 in play-akka.actor.default-dispatcher-9 
+SQL execution completed
+
+  [SQL Execution]
+   select t.id as i_on_t, t.title as t_on_t, t.done as d_on_t, t.due_date as dd_on_t, t.assigned_to as at_on_t, t.project as p_on_t, t.folder as f_on_t from task t where t.project = 1011; (0 ms)
+
+  [Stack Trace]
+    ...
+    models.Task$.findByProject(Task.scala:64)
+    controllers.Tasks$$anonfun$index$1$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$3.apply(Tasks.scala:22)
+    controllers.Tasks$$anonfun$index$1$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$3.apply(Tasks.scala:21)
+    scala.Option.map(Option.scala:145)
+    controllers.Tasks$$anonfun$index$1$$anonfun$apply$1$$anonfun$apply$2.apply(Tasks.scala:21)
+    controllers.Tasks$$anonfun$index$1$$anonfun$apply$1$$anonfun$apply$2.apply(Tasks.scala:20)
+    controllers.Secured$$anonfun$IsMemberOf$1$$anonfun$apply$4$$anonfun$apply$5.apply(Application.scala:96)
+    controllers.Secured$$anonfun$IsMemberOf$1$$anonfun$apply$4$$anonfun$apply$5.apply(Application.scala:94)
+    controllers.Secured$$anonfun$IsAuthenticated$3$$anonfun$apply$3.apply(Application.scala:88)
+    controllers.Secured$$anonfun$IsAuthenticated$3$$anonfun$apply$3.apply(Application.scala:88)
+    play.api.mvc.ActionBuilder$$anon$1.apply(Action.scala:217)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5$$anonfun$apply$6.apply(Action.scala:109)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5$$anonfun$apply$6.apply(Action.scala:109)
+    play.utils.Threads$.withContextClassLoader(Threads.scala:18)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5.apply(Action.scala:108)
+    ...
+
+
+2013-06-12 14:54:00,565 - [DEBUG] - from scalikejdbc.StatementExecutor$$anon$1 in play-akka.actor.default-dispatcher-9 
+SQL execution completed
+
+  [SQL Execution]
+   select u.email as e_on_u, u.name as n_on_u, u.password as p_on_u , m.project_id as pi_on_m, m.user_email as ue_on_m from users u inner join project_member m on m.user_email = u.email where m.project_id = 1011; (0 ms)
+
+  [Stack Trace]
+    ...
+    models.Project$.membersOf(Project.scala:71)
+    controllers.Tasks$$anonfun$index$1$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$3.apply(Tasks.scala:23)
+    controllers.Tasks$$anonfun$index$1$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$3.apply(Tasks.scala:21)
+    scala.Option.map(Option.scala:145)
+    controllers.Tasks$$anonfun$index$1$$anonfun$apply$1$$anonfun$apply$2.apply(Tasks.scala:21)
+    controllers.Tasks$$anonfun$index$1$$anonfun$apply$1$$anonfun$apply$2.apply(Tasks.scala:20)
+    controllers.Secured$$anonfun$IsMemberOf$1$$anonfun$apply$4$$anonfun$apply$5.apply(Application.scala:96)
+    controllers.Secured$$anonfun$IsMemberOf$1$$anonfun$apply$4$$anonfun$apply$5.apply(Application.scala:94)
+    controllers.Secured$$anonfun$IsAuthenticated$3$$anonfun$apply$3.apply(Application.scala:88)
+    controllers.Secured$$anonfun$IsAuthenticated$3$$anonfun$apply$3.apply(Application.scala:88)
+    play.api.mvc.ActionBuilder$$anon$1.apply(Action.scala:217)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5$$anonfun$apply$6.apply(Action.scala:109)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5$$anonfun$apply$6.apply(Action.scala:109)
+    play.utils.Threads$.withContextClassLoader(Threads.scala:18)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5.apply(Action.scala:108)
+    ...
+
+
+2013-06-12 14:54:00,568 - [DEBUG] - from scalikejdbc.StatementExecutor$$anon$1 in play-akka.actor.default-dispatcher-9 
+SQL execution completed
+
+  [SQL Execution]
+   select u.email as e_on_u, u.name as n_on_u, u.password as p_on_u from users u; (0 ms)
+
+  [Stack Trace]
+    ...
+    models.User$.findAll(User.scala:28)
+    views.html.tasks.index$.apply(index.template.scala:44)
+    controllers.Tasks$$anonfun$index$1$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$3.apply(Tasks.scala:24)
+    controllers.Tasks$$anonfun$index$1$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$3.apply(Tasks.scala:21)
+    scala.Option.map(Option.scala:145)
+    controllers.Tasks$$anonfun$index$1$$anonfun$apply$1$$anonfun$apply$2.apply(Tasks.scala:21)
+    controllers.Tasks$$anonfun$index$1$$anonfun$apply$1$$anonfun$apply$2.apply(Tasks.scala:20)
+    controllers.Secured$$anonfun$IsMemberOf$1$$anonfun$apply$4$$anonfun$apply$5.apply(Application.scala:96)
+    controllers.Secured$$anonfun$IsMemberOf$1$$anonfun$apply$4$$anonfun$apply$5.apply(Application.scala:94)
+    controllers.Secured$$anonfun$IsAuthenticated$3$$anonfun$apply$3.apply(Application.scala:88)
+    controllers.Secured$$anonfun$IsAuthenticated$3$$anonfun$apply$3.apply(Application.scala:88)
+    play.api.mvc.ActionBuilder$$anon$1.apply(Action.scala:217)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5$$anonfun$apply$6.apply(Action.scala:109)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5$$anonfun$apply$6.apply(Action.scala:109)
+    play.utils.Threads$.withContextClassLoader(Threads.scala:18)
+    ...
+
+
+2013-06-12 14:54:01,200 - [DEBUG] - from scalikejdbc.StatementExecutor$$anon$1 in play-akka.actor.default-dispatcher-9 
+SQL execution completed
+
+  [SQL Execution]
+   select u.email as e_on_u, u.name as n_on_u, u.password as p_on_u from users u where u.email = 'guillaume@sample.com'; (0 ms)
+
+  [Stack Trace]
+    ...
+    models.User$.findByEmail(User.scala:24)
+    controllers.Projects$$anonfun$index$1$$anonfun$apply$1$$anonfun$apply$2.apply(Projects.scala:20)
+    controllers.Projects$$anonfun$index$1$$anonfun$apply$1$$anonfun$apply$2.apply(Projects.scala:19)
+    controllers.Secured$$anonfun$IsAuthenticated$3$$anonfun$apply$3.apply(Application.scala:88)
+    controllers.Secured$$anonfun$IsAuthenticated$3$$anonfun$apply$3.apply(Application.scala:88)
+    play.api.mvc.ActionBuilder$$anon$1.apply(Action.scala:217)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5$$anonfun$apply$6.apply(Action.scala:109)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5$$anonfun$apply$6.apply(Action.scala:109)
+    play.utils.Threads$.withContextClassLoader(Threads.scala:18)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5.apply(Action.scala:108)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5.apply(Action.scala:106)
+    scala.Option.map(Option.scala:145)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2.apply(Action.scala:106)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2.apply(Action.scala:99)
+    scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24)
+    ...
+
+
+2013-06-12 14:54:01,203 - [DEBUG] - from scalikejdbc.StatementExecutor$$anon$1 in play-akka.actor.default-dispatcher-9 
+SQL execution completed
+
+  [SQL Execution]
+   select p.id as i_on_p, p.name as n_on_p, p.folder as f_on_p , m.project_id as pi_on_m, m.user_email as ue_on_m from project p inner join project_member m on p.id = m.project_id where m.user_email = 'guillaume@sample.com'; (0 ms)
+
+  [Stack Trace]
+    ...
+    models.Project$.findInvolving(Project.scala:48)
+    controllers.Projects$$anonfun$index$1$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$3.apply(Projects.scala:23)
+    controllers.Projects$$anonfun$index$1$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$3.apply(Projects.scala:20)
+    scala.Option.map(Option.scala:145)
+    controllers.Projects$$anonfun$index$1$$anonfun$apply$1$$anonfun$apply$2.apply(Projects.scala:20)
+    controllers.Projects$$anonfun$index$1$$anonfun$apply$1$$anonfun$apply$2.apply(Projects.scala:19)
+    controllers.Secured$$anonfun$IsAuthenticated$3$$anonfun$apply$3.apply(Application.scala:88)
+    controllers.Secured$$anonfun$IsAuthenticated$3$$anonfun$apply$3.apply(Application.scala:88)
+    play.api.mvc.ActionBuilder$$anon$1.apply(Action.scala:217)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5$$anonfun$apply$6.apply(Action.scala:109)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5$$anonfun$apply$6.apply(Action.scala:109)
+    play.utils.Threads$.withContextClassLoader(Threads.scala:18)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5.apply(Action.scala:108)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5.apply(Action.scala:106)
+    scala.Option.map(Option.scala:145)
+    ...
+
+
+2013-06-12 14:54:01,213 - [DEBUG] - from scalikejdbc.StatementExecutor$$anon$1 in play-akka.actor.default-dispatcher-9 
+SQL execution completed
+
+  [SQL Execution]
+   select t.id as i_on_t, t.title as t_on_t, t.done as d_on_t, t.due_date as dd_on_t, t.assigned_to as at_on_t, t.project as p_on_t, t.folder as f_on_t , m.project_id as pi_on_m, m.user_email as ue_on_m , p.id as i_on_p, p.name as n_on_p, p.folder as f_on_p from task t inner join project_member m on m.project_id = t.project inner join project p on p.id = m.project_id where t.done = false and m.user_email = 'guillaume@sample.com'; (0 ms)
+
+  [Stack Trace]
+    ...
+    models.Task$.findTodoInvolving(Task.scala:60)
+    controllers.Projects$$anonfun$index$1$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$3.apply(Projects.scala:24)
+    controllers.Projects$$anonfun$index$1$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$3.apply(Projects.scala:20)
+    scala.Option.map(Option.scala:145)
+    controllers.Projects$$anonfun$index$1$$anonfun$apply$1$$anonfun$apply$2.apply(Projects.scala:20)
+    controllers.Projects$$anonfun$index$1$$anonfun$apply$1$$anonfun$apply$2.apply(Projects.scala:19)
+    controllers.Secured$$anonfun$IsAuthenticated$3$$anonfun$apply$3.apply(Application.scala:88)
+    controllers.Secured$$anonfun$IsAuthenticated$3$$anonfun$apply$3.apply(Application.scala:88)
+    play.api.mvc.ActionBuilder$$anon$1.apply(Action.scala:217)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5$$anonfun$apply$6.apply(Action.scala:109)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5$$anonfun$apply$6.apply(Action.scala:109)
+    play.utils.Threads$.withContextClassLoader(Threads.scala:18)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5.apply(Action.scala:108)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5.apply(Action.scala:106)
+    scala.Option.map(Option.scala:145)
+    ...
+
+
+2013-06-12 14:54:01,520 - [DEBUG] - from scalikejdbc.StatementExecutor$$anon$1 in play-akka.actor.default-dispatcher-2 
+SQL execution completed
+
+  [SQL Execution]
+   select count(u.email) = 1 as is_member from users u inner join project_member m on m.user_email = u.email where m.project_id = 1011 and u.email = 'guillaume@sample.com'; (0 ms)
+
+  [Stack Trace]
+    ...
+    models.Project$.isMember(Project.scala:86)
+    controllers.Secured$$anonfun$IsMemberOf$1$$anonfun$apply$4$$anonfun$apply$5.apply(Application.scala:95)
+    controllers.Secured$$anonfun$IsMemberOf$1$$anonfun$apply$4$$anonfun$apply$5.apply(Application.scala:94)
+    controllers.Secured$$anonfun$IsAuthenticated$3$$anonfun$apply$3.apply(Application.scala:88)
+    controllers.Secured$$anonfun$IsAuthenticated$3$$anonfun$apply$3.apply(Application.scala:88)
+    play.api.mvc.ActionBuilder$$anon$1.apply(Action.scala:217)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5$$anonfun$apply$6.apply(Action.scala:109)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5$$anonfun$apply$6.apply(Action.scala:109)
+    play.utils.Threads$.withContextClassLoader(Threads.scala:18)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5.apply(Action.scala:108)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5.apply(Action.scala:106)
+    scala.Option.map(Option.scala:145)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2.apply(Action.scala:106)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2.apply(Action.scala:99)
+    scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24)
+    ...
+
+
+2013-06-12 14:54:01,522 - [DEBUG] - from scalikejdbc.StatementExecutor$$anon$1 in play-akka.actor.default-dispatcher-2 
+SQL execution completed
+
+  [SQL Execution]
+   select p.id as i_on_p, p.name as n_on_p, p.folder as f_on_p from project p where p.id = 1011; (0 ms)
+
+  [Stack Trace]
+    ...
+    models.Project$.findById(Project.scala:41)
+    controllers.Tasks$$anonfun$index$1$$anonfun$apply$1$$anonfun$apply$2.apply(Tasks.scala:21)
+    controllers.Tasks$$anonfun$index$1$$anonfun$apply$1$$anonfun$apply$2.apply(Tasks.scala:20)
+    controllers.Secured$$anonfun$IsMemberOf$1$$anonfun$apply$4$$anonfun$apply$5.apply(Application.scala:96)
+    controllers.Secured$$anonfun$IsMemberOf$1$$anonfun$apply$4$$anonfun$apply$5.apply(Application.scala:94)
+    controllers.Secured$$anonfun$IsAuthenticated$3$$anonfun$apply$3.apply(Application.scala:88)
+    controllers.Secured$$anonfun$IsAuthenticated$3$$anonfun$apply$3.apply(Application.scala:88)
+    play.api.mvc.ActionBuilder$$anon$1.apply(Action.scala:217)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5$$anonfun$apply$6.apply(Action.scala:109)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5$$anonfun$apply$6.apply(Action.scala:109)
+    play.utils.Threads$.withContextClassLoader(Threads.scala:18)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5.apply(Action.scala:108)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5.apply(Action.scala:106)
+    scala.Option.map(Option.scala:145)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2.apply(Action.scala:106)
+    ...
+
+
+2013-06-12 14:54:01,526 - [DEBUG] - from scalikejdbc.StatementExecutor$$anon$1 in play-akka.actor.default-dispatcher-2 
+SQL execution completed
+
+  [SQL Execution]
+   select t.id as i_on_t, t.title as t_on_t, t.done as d_on_t, t.due_date as dd_on_t, t.assigned_to as at_on_t, t.project as p_on_t, t.folder as f_on_t from task t where t.project = 1011; (0 ms)
+
+  [Stack Trace]
+    ...
+    models.Task$.findByProject(Task.scala:64)
+    controllers.Tasks$$anonfun$index$1$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$3.apply(Tasks.scala:22)
+    controllers.Tasks$$anonfun$index$1$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$3.apply(Tasks.scala:21)
+    scala.Option.map(Option.scala:145)
+    controllers.Tasks$$anonfun$index$1$$anonfun$apply$1$$anonfun$apply$2.apply(Tasks.scala:21)
+    controllers.Tasks$$anonfun$index$1$$anonfun$apply$1$$anonfun$apply$2.apply(Tasks.scala:20)
+    controllers.Secured$$anonfun$IsMemberOf$1$$anonfun$apply$4$$anonfun$apply$5.apply(Application.scala:96)
+    controllers.Secured$$anonfun$IsMemberOf$1$$anonfun$apply$4$$anonfun$apply$5.apply(Application.scala:94)
+    controllers.Secured$$anonfun$IsAuthenticated$3$$anonfun$apply$3.apply(Application.scala:88)
+    controllers.Secured$$anonfun$IsAuthenticated$3$$anonfun$apply$3.apply(Application.scala:88)
+    play.api.mvc.ActionBuilder$$anon$1.apply(Action.scala:217)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5$$anonfun$apply$6.apply(Action.scala:109)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5$$anonfun$apply$6.apply(Action.scala:109)
+    play.utils.Threads$.withContextClassLoader(Threads.scala:18)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5.apply(Action.scala:108)
+    ...
+
+
+2013-06-12 14:54:01,531 - [DEBUG] - from scalikejdbc.StatementExecutor$$anon$1 in play-akka.actor.default-dispatcher-2 
+SQL execution completed
+
+  [SQL Execution]
+   select u.email as e_on_u, u.name as n_on_u, u.password as p_on_u , m.project_id as pi_on_m, m.user_email as ue_on_m from users u inner join project_member m on m.user_email = u.email where m.project_id = 1011; (0 ms)
+
+  [Stack Trace]
+    ...
+    models.Project$.membersOf(Project.scala:71)
+    controllers.Tasks$$anonfun$index$1$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$3.apply(Tasks.scala:23)
+    controllers.Tasks$$anonfun$index$1$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$3.apply(Tasks.scala:21)
+    scala.Option.map(Option.scala:145)
+    controllers.Tasks$$anonfun$index$1$$anonfun$apply$1$$anonfun$apply$2.apply(Tasks.scala:21)
+    controllers.Tasks$$anonfun$index$1$$anonfun$apply$1$$anonfun$apply$2.apply(Tasks.scala:20)
+    controllers.Secured$$anonfun$IsMemberOf$1$$anonfun$apply$4$$anonfun$apply$5.apply(Application.scala:96)
+    controllers.Secured$$anonfun$IsMemberOf$1$$anonfun$apply$4$$anonfun$apply$5.apply(Application.scala:94)
+    controllers.Secured$$anonfun$IsAuthenticated$3$$anonfun$apply$3.apply(Application.scala:88)
+    controllers.Secured$$anonfun$IsAuthenticated$3$$anonfun$apply$3.apply(Application.scala:88)
+    play.api.mvc.ActionBuilder$$anon$1.apply(Action.scala:217)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5$$anonfun$apply$6.apply(Action.scala:109)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5$$anonfun$apply$6.apply(Action.scala:109)
+    play.utils.Threads$.withContextClassLoader(Threads.scala:18)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5.apply(Action.scala:108)
+    ...
+
+
+2013-06-12 14:54:01,533 - [DEBUG] - from scalikejdbc.StatementExecutor$$anon$1 in play-akka.actor.default-dispatcher-2 
+SQL execution completed
+
+  [SQL Execution]
+   select u.email as e_on_u, u.name as n_on_u, u.password as p_on_u from users u; (0 ms)
+
+  [Stack Trace]
+    ...
+    models.User$.findAll(User.scala:28)
+    views.html.tasks.index$.apply(index.template.scala:44)
+    controllers.Tasks$$anonfun$index$1$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$3.apply(Tasks.scala:24)
+    controllers.Tasks$$anonfun$index$1$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$3.apply(Tasks.scala:21)
+    scala.Option.map(Option.scala:145)
+    controllers.Tasks$$anonfun$index$1$$anonfun$apply$1$$anonfun$apply$2.apply(Tasks.scala:21)
+    controllers.Tasks$$anonfun$index$1$$anonfun$apply$1$$anonfun$apply$2.apply(Tasks.scala:20)
+    controllers.Secured$$anonfun$IsMemberOf$1$$anonfun$apply$4$$anonfun$apply$5.apply(Application.scala:96)
+    controllers.Secured$$anonfun$IsMemberOf$1$$anonfun$apply$4$$anonfun$apply$5.apply(Application.scala:94)
+    controllers.Secured$$anonfun$IsAuthenticated$3$$anonfun$apply$3.apply(Application.scala:88)
+    controllers.Secured$$anonfun$IsAuthenticated$3$$anonfun$apply$3.apply(Application.scala:88)
+    play.api.mvc.ActionBuilder$$anon$1.apply(Action.scala:217)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5$$anonfun$apply$6.apply(Action.scala:109)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5$$anonfun$apply$6.apply(Action.scala:109)
+    play.utils.Threads$.withContextClassLoader(Threads.scala:18)
+    ...
+
+
+2013-06-12 14:54:02,439 - [DEBUG] - from scalikejdbc.StatementExecutor$$anon$1 in play-akka.actor.default-dispatcher-2 
+SQL execution completed
+
+  [SQL Execution]
+   select count(u.email) = 1 as is_member from users u inner join project_member m on m.user_email = u.email where m.project_id = 1000 and u.email = 'guillaume@sample.com'; (1 ms)
+
+  [Stack Trace]
+    ...
+    models.Project$.isMember(Project.scala:86)
+    controllers.Secured$$anonfun$IsMemberOf$1$$anonfun$apply$4$$anonfun$apply$5.apply(Application.scala:95)
+    controllers.Secured$$anonfun$IsMemberOf$1$$anonfun$apply$4$$anonfun$apply$5.apply(Application.scala:94)
+    controllers.Secured$$anonfun$IsAuthenticated$3$$anonfun$apply$3.apply(Application.scala:88)
+    controllers.Secured$$anonfun$IsAuthenticated$3$$anonfun$apply$3.apply(Application.scala:88)
+    play.api.mvc.ActionBuilder$$anon$1.apply(Action.scala:217)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5$$anonfun$apply$6.apply(Action.scala:109)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5$$anonfun$apply$6.apply(Action.scala:109)
+    play.utils.Threads$.withContextClassLoader(Threads.scala:18)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5.apply(Action.scala:108)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5.apply(Action.scala:106)
+    scala.Option.map(Option.scala:145)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2.apply(Action.scala:106)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2.apply(Action.scala:99)
+    scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24)
+    ...
+
+
+2013-06-12 14:54:02,441 - [DEBUG] - from scalikejdbc.StatementExecutor$$anon$1 in play-akka.actor.default-dispatcher-2 
+SQL execution completed
+
+  [SQL Execution]
+   select p.id as i_on_p, p.name as n_on_p, p.folder as f_on_p from project p where p.id = 1000; (0 ms)
+
+  [Stack Trace]
+    ...
+    models.Project$.findById(Project.scala:41)
+    controllers.Tasks$$anonfun$index$1$$anonfun$apply$1$$anonfun$apply$2.apply(Tasks.scala:21)
+    controllers.Tasks$$anonfun$index$1$$anonfun$apply$1$$anonfun$apply$2.apply(Tasks.scala:20)
+    controllers.Secured$$anonfun$IsMemberOf$1$$anonfun$apply$4$$anonfun$apply$5.apply(Application.scala:96)
+    controllers.Secured$$anonfun$IsMemberOf$1$$anonfun$apply$4$$anonfun$apply$5.apply(Application.scala:94)
+    controllers.Secured$$anonfun$IsAuthenticated$3$$anonfun$apply$3.apply(Application.scala:88)
+    controllers.Secured$$anonfun$IsAuthenticated$3$$anonfun$apply$3.apply(Application.scala:88)
+    play.api.mvc.ActionBuilder$$anon$1.apply(Action.scala:217)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5$$anonfun$apply$6.apply(Action.scala:109)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5$$anonfun$apply$6.apply(Action.scala:109)
+    play.utils.Threads$.withContextClassLoader(Threads.scala:18)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5.apply(Action.scala:108)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5.apply(Action.scala:106)
+    scala.Option.map(Option.scala:145)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2.apply(Action.scala:106)
+    ...
+
+
+2013-06-12 14:54:02,443 - [DEBUG] - from scalikejdbc.StatementExecutor$$anon$1 in play-akka.actor.default-dispatcher-2 
+SQL execution completed
+
+  [SQL Execution]
+   select t.id as i_on_t, t.title as t_on_t, t.done as d_on_t, t.due_date as dd_on_t, t.assigned_to as at_on_t, t.project as p_on_t, t.folder as f_on_t from task t where t.project = 1000; (0 ms)
+
+  [Stack Trace]
+    ...
+    models.Task$.findByProject(Task.scala:64)
+    controllers.Tasks$$anonfun$index$1$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$3.apply(Tasks.scala:22)
+    controllers.Tasks$$anonfun$index$1$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$3.apply(Tasks.scala:21)
+    scala.Option.map(Option.scala:145)
+    controllers.Tasks$$anonfun$index$1$$anonfun$apply$1$$anonfun$apply$2.apply(Tasks.scala:21)
+    controllers.Tasks$$anonfun$index$1$$anonfun$apply$1$$anonfun$apply$2.apply(Tasks.scala:20)
+    controllers.Secured$$anonfun$IsMemberOf$1$$anonfun$apply$4$$anonfun$apply$5.apply(Application.scala:96)
+    controllers.Secured$$anonfun$IsMemberOf$1$$anonfun$apply$4$$anonfun$apply$5.apply(Application.scala:94)
+    controllers.Secured$$anonfun$IsAuthenticated$3$$anonfun$apply$3.apply(Application.scala:88)
+    controllers.Secured$$anonfun$IsAuthenticated$3$$anonfun$apply$3.apply(Application.scala:88)
+    play.api.mvc.ActionBuilder$$anon$1.apply(Action.scala:217)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5$$anonfun$apply$6.apply(Action.scala:109)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5$$anonfun$apply$6.apply(Action.scala:109)
+    play.utils.Threads$.withContextClassLoader(Threads.scala:18)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5.apply(Action.scala:108)
+    ...
+
+
+2013-06-12 14:54:02,452 - [DEBUG] - from scalikejdbc.StatementExecutor$$anon$1 in play-akka.actor.default-dispatcher-2 
+SQL execution completed
+
+  [SQL Execution]
+   select u.email as e_on_u, u.name as n_on_u, u.password as p_on_u , m.project_id as pi_on_m, m.user_email as ue_on_m from users u inner join project_member m on m.user_email = u.email where m.project_id = 1000; (0 ms)
+
+  [Stack Trace]
+    ...
+    models.Project$.membersOf(Project.scala:71)
+    controllers.Tasks$$anonfun$index$1$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$3.apply(Tasks.scala:23)
+    controllers.Tasks$$anonfun$index$1$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$3.apply(Tasks.scala:21)
+    scala.Option.map(Option.scala:145)
+    controllers.Tasks$$anonfun$index$1$$anonfun$apply$1$$anonfun$apply$2.apply(Tasks.scala:21)
+    controllers.Tasks$$anonfun$index$1$$anonfun$apply$1$$anonfun$apply$2.apply(Tasks.scala:20)
+    controllers.Secured$$anonfun$IsMemberOf$1$$anonfun$apply$4$$anonfun$apply$5.apply(Application.scala:96)
+    controllers.Secured$$anonfun$IsMemberOf$1$$anonfun$apply$4$$anonfun$apply$5.apply(Application.scala:94)
+    controllers.Secured$$anonfun$IsAuthenticated$3$$anonfun$apply$3.apply(Application.scala:88)
+    controllers.Secured$$anonfun$IsAuthenticated$3$$anonfun$apply$3.apply(Application.scala:88)
+    play.api.mvc.ActionBuilder$$anon$1.apply(Action.scala:217)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5$$anonfun$apply$6.apply(Action.scala:109)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5$$anonfun$apply$6.apply(Action.scala:109)
+    play.utils.Threads$.withContextClassLoader(Threads.scala:18)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5.apply(Action.scala:108)
+    ...
+
+
+2013-06-12 14:54:02,456 - [DEBUG] - from scalikejdbc.StatementExecutor$$anon$1 in play-akka.actor.default-dispatcher-2 
+SQL execution completed
+
+  [SQL Execution]
+   select u.email as e_on_u, u.name as n_on_u, u.password as p_on_u from users u; (0 ms)
+
+  [Stack Trace]
+    ...
+    models.User$.findAll(User.scala:28)
+    views.html.tasks.index$.apply(index.template.scala:44)
+    controllers.Tasks$$anonfun$index$1$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$3.apply(Tasks.scala:24)
+    controllers.Tasks$$anonfun$index$1$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$3.apply(Tasks.scala:21)
+    scala.Option.map(Option.scala:145)
+    controllers.Tasks$$anonfun$index$1$$anonfun$apply$1$$anonfun$apply$2.apply(Tasks.scala:21)
+    controllers.Tasks$$anonfun$index$1$$anonfun$apply$1$$anonfun$apply$2.apply(Tasks.scala:20)
+    controllers.Secured$$anonfun$IsMemberOf$1$$anonfun$apply$4$$anonfun$apply$5.apply(Application.scala:96)
+    controllers.Secured$$anonfun$IsMemberOf$1$$anonfun$apply$4$$anonfun$apply$5.apply(Application.scala:94)
+    controllers.Secured$$anonfun$IsAuthenticated$3$$anonfun$apply$3.apply(Application.scala:88)
+    controllers.Secured$$anonfun$IsAuthenticated$3$$anonfun$apply$3.apply(Application.scala:88)
+    play.api.mvc.ActionBuilder$$anon$1.apply(Action.scala:217)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5$$anonfun$apply$6.apply(Action.scala:109)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5$$anonfun$apply$6.apply(Action.scala:109)
+    play.utils.Threads$.withContextClassLoader(Threads.scala:18)
+    ...
+
+
+2013-06-12 14:54:03,119 - [DEBUG] - from scalikejdbc.StatementExecutor$$anon$1 in play-akka.actor.default-dispatcher-2 
+SQL execution completed
+
+  [SQL Execution]
+   select count(u.email) = 1 as is_member from users u inner join project_member m on m.user_email = u.email where m.project_id = 1001 and u.email = 'guillaume@sample.com'; (0 ms)
+
+  [Stack Trace]
+    ...
+    models.Project$.isMember(Project.scala:86)
+    controllers.Secured$$anonfun$IsMemberOf$1$$anonfun$apply$4$$anonfun$apply$5.apply(Application.scala:95)
+    controllers.Secured$$anonfun$IsMemberOf$1$$anonfun$apply$4$$anonfun$apply$5.apply(Application.scala:94)
+    controllers.Secured$$anonfun$IsAuthenticated$3$$anonfun$apply$3.apply(Application.scala:88)
+    controllers.Secured$$anonfun$IsAuthenticated$3$$anonfun$apply$3.apply(Application.scala:88)
+    play.api.mvc.ActionBuilder$$anon$1.apply(Action.scala:217)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5$$anonfun$apply$6.apply(Action.scala:109)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5$$anonfun$apply$6.apply(Action.scala:109)
+    play.utils.Threads$.withContextClassLoader(Threads.scala:18)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5.apply(Action.scala:108)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5.apply(Action.scala:106)
+    scala.Option.map(Option.scala:145)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2.apply(Action.scala:106)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2.apply(Action.scala:99)
+    scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24)
+    ...
+
+
+2013-06-12 14:54:03,120 - [DEBUG] - from scalikejdbc.StatementExecutor$$anon$1 in play-akka.actor.default-dispatcher-2 
+SQL execution completed
+
+  [SQL Execution]
+   select p.id as i_on_p, p.name as n_on_p, p.folder as f_on_p from project p where p.id = 1001; (0 ms)
+
+  [Stack Trace]
+    ...
+    models.Project$.findById(Project.scala:41)
+    controllers.Tasks$$anonfun$index$1$$anonfun$apply$1$$anonfun$apply$2.apply(Tasks.scala:21)
+    controllers.Tasks$$anonfun$index$1$$anonfun$apply$1$$anonfun$apply$2.apply(Tasks.scala:20)
+    controllers.Secured$$anonfun$IsMemberOf$1$$anonfun$apply$4$$anonfun$apply$5.apply(Application.scala:96)
+    controllers.Secured$$anonfun$IsMemberOf$1$$anonfun$apply$4$$anonfun$apply$5.apply(Application.scala:94)
+    controllers.Secured$$anonfun$IsAuthenticated$3$$anonfun$apply$3.apply(Application.scala:88)
+    controllers.Secured$$anonfun$IsAuthenticated$3$$anonfun$apply$3.apply(Application.scala:88)
+    play.api.mvc.ActionBuilder$$anon$1.apply(Action.scala:217)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5$$anonfun$apply$6.apply(Action.scala:109)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5$$anonfun$apply$6.apply(Action.scala:109)
+    play.utils.Threads$.withContextClassLoader(Threads.scala:18)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5.apply(Action.scala:108)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5.apply(Action.scala:106)
+    scala.Option.map(Option.scala:145)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2.apply(Action.scala:106)
+    ...
+
+
+2013-06-12 14:54:03,123 - [DEBUG] - from scalikejdbc.StatementExecutor$$anon$1 in play-akka.actor.default-dispatcher-2 
+SQL execution completed
+
+  [SQL Execution]
+   select t.id as i_on_t, t.title as t_on_t, t.done as d_on_t, t.due_date as dd_on_t, t.assigned_to as at_on_t, t.project as p_on_t, t.folder as f_on_t from task t where t.project = 1001; (0 ms)
+
+  [Stack Trace]
+    ...
+    models.Task$.findByProject(Task.scala:64)
+    controllers.Tasks$$anonfun$index$1$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$3.apply(Tasks.scala:22)
+    controllers.Tasks$$anonfun$index$1$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$3.apply(Tasks.scala:21)
+    scala.Option.map(Option.scala:145)
+    controllers.Tasks$$anonfun$index$1$$anonfun$apply$1$$anonfun$apply$2.apply(Tasks.scala:21)
+    controllers.Tasks$$anonfun$index$1$$anonfun$apply$1$$anonfun$apply$2.apply(Tasks.scala:20)
+    controllers.Secured$$anonfun$IsMemberOf$1$$anonfun$apply$4$$anonfun$apply$5.apply(Application.scala:96)
+    controllers.Secured$$anonfun$IsMemberOf$1$$anonfun$apply$4$$anonfun$apply$5.apply(Application.scala:94)
+    controllers.Secured$$anonfun$IsAuthenticated$3$$anonfun$apply$3.apply(Application.scala:88)
+    controllers.Secured$$anonfun$IsAuthenticated$3$$anonfun$apply$3.apply(Application.scala:88)
+    play.api.mvc.ActionBuilder$$anon$1.apply(Action.scala:217)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5$$anonfun$apply$6.apply(Action.scala:109)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5$$anonfun$apply$6.apply(Action.scala:109)
+    play.utils.Threads$.withContextClassLoader(Threads.scala:18)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5.apply(Action.scala:108)
+    ...
+
+
+2013-06-12 14:54:03,127 - [DEBUG] - from scalikejdbc.StatementExecutor$$anon$1 in play-akka.actor.default-dispatcher-2 
+SQL execution completed
+
+  [SQL Execution]
+   select u.email as e_on_u, u.name as n_on_u, u.password as p_on_u , m.project_id as pi_on_m, m.user_email as ue_on_m from users u inner join project_member m on m.user_email = u.email where m.project_id = 1001; (0 ms)
+
+  [Stack Trace]
+    ...
+    models.Project$.membersOf(Project.scala:71)
+    controllers.Tasks$$anonfun$index$1$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$3.apply(Tasks.scala:23)
+    controllers.Tasks$$anonfun$index$1$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$3.apply(Tasks.scala:21)
+    scala.Option.map(Option.scala:145)
+    controllers.Tasks$$anonfun$index$1$$anonfun$apply$1$$anonfun$apply$2.apply(Tasks.scala:21)
+    controllers.Tasks$$anonfun$index$1$$anonfun$apply$1$$anonfun$apply$2.apply(Tasks.scala:20)
+    controllers.Secured$$anonfun$IsMemberOf$1$$anonfun$apply$4$$anonfun$apply$5.apply(Application.scala:96)
+    controllers.Secured$$anonfun$IsMemberOf$1$$anonfun$apply$4$$anonfun$apply$5.apply(Application.scala:94)
+    controllers.Secured$$anonfun$IsAuthenticated$3$$anonfun$apply$3.apply(Application.scala:88)
+    controllers.Secured$$anonfun$IsAuthenticated$3$$anonfun$apply$3.apply(Application.scala:88)
+    play.api.mvc.ActionBuilder$$anon$1.apply(Action.scala:217)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5$$anonfun$apply$6.apply(Action.scala:109)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5$$anonfun$apply$6.apply(Action.scala:109)
+    play.utils.Threads$.withContextClassLoader(Threads.scala:18)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5.apply(Action.scala:108)
+    ...
+
+
+2013-06-12 14:54:03,130 - [DEBUG] - from scalikejdbc.StatementExecutor$$anon$1 in play-akka.actor.default-dispatcher-2 
+SQL execution completed
+
+  [SQL Execution]
+   select u.email as e_on_u, u.name as n_on_u, u.password as p_on_u from users u; (0 ms)
+
+  [Stack Trace]
+    ...
+    models.User$.findAll(User.scala:28)
+    views.html.tasks.index$.apply(index.template.scala:44)
+    controllers.Tasks$$anonfun$index$1$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$3.apply(Tasks.scala:24)
+    controllers.Tasks$$anonfun$index$1$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$3.apply(Tasks.scala:21)
+    scala.Option.map(Option.scala:145)
+    controllers.Tasks$$anonfun$index$1$$anonfun$apply$1$$anonfun$apply$2.apply(Tasks.scala:21)
+    controllers.Tasks$$anonfun$index$1$$anonfun$apply$1$$anonfun$apply$2.apply(Tasks.scala:20)
+    controllers.Secured$$anonfun$IsMemberOf$1$$anonfun$apply$4$$anonfun$apply$5.apply(Application.scala:96)
+    controllers.Secured$$anonfun$IsMemberOf$1$$anonfun$apply$4$$anonfun$apply$5.apply(Application.scala:94)
+    controllers.Secured$$anonfun$IsAuthenticated$3$$anonfun$apply$3.apply(Application.scala:88)
+    controllers.Secured$$anonfun$IsAuthenticated$3$$anonfun$apply$3.apply(Application.scala:88)
+    play.api.mvc.ActionBuilder$$anon$1.apply(Action.scala:217)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5$$anonfun$apply$6.apply(Action.scala:109)
+    play.api.mvc.Action$$anonfun$apply$1$$anonfun$apply$2$$anonfun$apply$5$$anonfun$apply$6.apply(Action.scala:109)
+    play.utils.Threads$.withContextClassLoader(Threads.scala:18)
+    ...
+
+

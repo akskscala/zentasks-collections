@@ -21,10 +21,10 @@ object InitialData {
 
   def createTables() = {
 
-    import scalikejdbc._
+    import scalikejdbc._, SQLInterpolation._
     val ddl = """
-drop table user if exists;
-create table user (
+drop table users if exists;
+create table users (
   email                     varchar(255) not null primary key,
   name                      varchar(255) not null,
   password                  varchar(255) not null
@@ -45,7 +45,7 @@ create table project_member (
   project_id                bigint not null,
   user_email                varchar(255) not null,
   foreign key(project_id)   references project(id) on delete cascade,
-  foreign key(user_email)   references user(email) on delete cascade
+  foreign key(user_email)   references users(email) on delete cascade
 );
 
 drop table task if exists;
@@ -57,7 +57,7 @@ create table task (
   assigned_to               varchar(255),
   project                   bigint not null,
   folder                    varchar(255),
-  foreign key(assigned_to)  references user(email) on delete set null,
+  foreign key(assigned_to)  references users(email) on delete set null,
   foreign key(project)      references project(id) on delete cascade
 );
 
@@ -67,8 +67,8 @@ create sequence task_seq start with 1000;
 
     DB autoCommit { implicit session =>
       try {
-        SQL("select * from user").map(rs => rs).list.apply()
-      } catch { case e => 
+        sql"select 1 from users limit 1".map(_.long(1)).list.apply()
+      } catch { case e: Exception => 
         SQL(ddl).execute.apply()
       }
     }
